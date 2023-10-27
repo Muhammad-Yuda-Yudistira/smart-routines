@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Routine;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,7 +13,10 @@ class RoutineController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Routines/Routines');
+        $routines = Routine::orderBy('start_time', 'ASC')->with('category')->get();
+        return Inertia::render('Routines/Routines', [
+            'routines' => $routines
+        ]);
     }
 
     /**

@@ -1,7 +1,7 @@
 import { Link, Head } from "@inertiajs/react";
 import List from "@/Components/Routines/List";
 
-export default function Routines() {
+export default function Routines({ auth, routines }) {
     return (
         <>
             <Head title="Routines" />
@@ -10,7 +10,7 @@ export default function Routines() {
                     <h1 className="text-5xl">Your Routines</h1>
                     <p>thrusday, 26 oktober 2023</p>
                 </div>
-                <List />
+                <List routines={routines} />
             </div>
         </>
     );
