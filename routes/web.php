@@ -5,6 +5,7 @@ use App\Http\Controllers\RoutineController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,16 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Routines/Routines');
+    return ('
+    <a href="http://smart-routines.test/routines">Content Utama</a>
+    ');
 });
 
-Route::resource('/routines', RoutineController::class);
+Route::get('/routines', function () {
+    return Inertia::render('Routines/Routines');
+})->middleware('guest');
+
+Route::resource('/dashboard/routines', RoutineController::class)->middleware('auth');
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
