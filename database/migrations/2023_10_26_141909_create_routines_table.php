@@ -17,10 +17,12 @@ return new class extends Migration
             $table->text('description');
             $table->foreignId('category_id');
             $table->foreignId('user_id');
-            $table->time('start_time')->unique();
-            $table->time('end_time')->unique();
+            $table->time('start_time');
+            $table->time('end_time');
             $table->json('days');
             $table->timestamps();
+
+            $table->unique(['user_id', 'start_time', 'end_time']);
         });
     }
 

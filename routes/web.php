@@ -19,9 +19,7 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 */
 
 Route::get('/', function () {
-    return ('
-    <a href="http://smart-routines.test/routines">Content Utama</a>
-    ');
+    return Inertia::render('Routines/Routines');
 });
 
 Route::get('/routines', function () {

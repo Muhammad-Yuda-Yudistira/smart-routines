@@ -2,9 +2,7 @@ import { Link } from "@inertiajs/react";
 import { useState } from "react";
 import Card from "./Card";
 
-export default function List({ routines, user }) {
-    const [today, setToday] = useState("23:59:00"); //1439
-
+export default function List({ routines, user, categories }) {
     let startPoint = [];
     let endPoint = [];
     routines.map((routine) => {
@@ -12,20 +10,28 @@ export default function List({ routines, user }) {
         endPoint = [...endPoint, routine.end_time];
     });
 
+    console.log("start:", startPoint);
+    console.log("end:", endPoint);
+
     let startedPoint = convertTimeToMinute(startPoint[0]);
     startedPoint = convertToHuman(startedPoint);
-    let endedPoint = endPoint[endPoint.length - 1];
 
     return (
         <>
             <ul className="steps steps-vertical w-full">
                 {startPoint[0] !== "00:00:00" && (
-                    <li className="step">
-                        <Card newTime={startedPoint} closing="00:00:00" />
+                    <li className="step" key="0">
+                        <Card
+                            newTime={startedPoint}
+                            opening="00:00"
+                            categories={categories}
+                        />
                     </li>
                 )}
                 {routines &&
                     routines.map((routine, index) => {
+                        console.log("end time:", routine.end_time);
+                        index = index + 1;
                         // waktu dalam menit
                         const startInMinute = convertTimeToMinute(
                             routine.start_time
@@ -47,9 +53,9 @@ export default function List({ routines, user }) {
                             const startPointInMinute = convertTimeToMinute(
                                 routine.end_time
                             );
-                            if (startPoint[index + 1]) {
+                            if (startPoint[index]) {
                                 const endPointInMinute = convertTimeToMinute(
-                                    startPoint[index + 1]
+                                    startPoint[index]
                                 );
                                 // // selisihnya
                                 const newPointMinute = minuteDifference(
@@ -66,21 +72,27 @@ export default function List({ routines, user }) {
                         }
                         return (
                             <>
-                                <li className="step">
+                                <li className="step" key={index}>
                                     <Card
                                         routine={routine}
                                         index={index}
                                         newTime={newTime}
                                     />
                                 </li>
-                                {!endPoint.includes(routine.start_time) && (
-                                    <li className="step">
-                                        <Card
-                                            closing={endedPoint}
-                                            newTime={newPointTime}
-                                        />
-                                    </li>
-                                )}
+                                {!startPoint.includes(routine.end_time) &&
+                                    routine.end_time !== "12:00:00" && (
+                                        <li
+                                            className="step"
+                                            key={routines.length + index}
+                                        >
+                                            <Card
+                                                opening={routine.end_time}
+                                                newTime={newPointTime}
+                                                categories={categories}
+                                                index={routines.length + index}
+                                            />
+                                        </li>
+                                    )}
                             </>
                         );
                     })}
@@ -92,8 +104,12 @@ export default function List({ routines, user }) {
 
 function convertTimeToMinute(time) {
     const [hour, minute, second] = time.split(":").map(Number);
-    const inMinutes = Math.floor(hour * 60 + minute + second / 60);
-    return inMinutes;
+    if (hour == "12" || (hour == "00" && minute == "00" && second == "00")) {
+        return 1440;
+    } else {
+        const inMinutes = Math.floor(hour * 60 + minute + second / 60);
+        return inMinutes;
+    }
 }
 function minuteDifference(minuteStart, minuteEnd) {
     return minuteEnd - minuteStart;
