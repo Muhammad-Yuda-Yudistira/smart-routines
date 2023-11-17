@@ -18,6 +18,7 @@ class RoutineController extends Controller
   {
     $routines = Routine::where('user_id', auth()->user()->id)->orderBy('start_time', 'ASC')->with('category')->get();
     $categories = Category::all();
+
     return Inertia::render('Routines/Routines', [
       'routines' => $routines,
       'categories' => $categories
