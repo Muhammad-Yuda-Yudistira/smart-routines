@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import Modal from "@/Components/Routines/Modal";
 import { useState } from "react";
 
@@ -14,17 +14,52 @@ export default function Card({
     document.querySelector(`#my_modal_5[index="${keyModal}"]`).showModal();
   }
   return routine !== null ? (
-    <div className="chat chat-start w-full text-black text-start">
-      <div className="chat-header">
-        <time className="text-sm opacity-50">{routine.start_time}</time>
+    <>
+      <div className="chat chat-start w-full text-black text-start flex-1">
+        <div className="chat-header">
+          <time className="text-sm opacity-50">{routine.start_time}</time>
+        </div>
+        <div className="chat-bubble p-8 py-4 min-w-44">
+          <div className="badge badge-secondary mb-3">
+            {routine.category.name}
+          </div>
+          <h2 className="text-xl font-bold">{routine.title}</h2>
+          <p>{routine.description}</p>
+          <p className="text-xs">{newTime}</p>
+          <div className="action flex gap-1 pt-3">
+            <button
+              id="open-modal"
+              className="badge badge-accent"
+              onClick={handleModalBox}
+              index={routine.id}
+            >
+              Edit
+            </button>
+            <Link
+              as="button"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                if (confirm("Are you sure?")) {
+                  router.delete(route("routines.destroy", { id: routine.id }));
+                }
+              }}
+              className="badge badge-secondary"
+            >
+              Delete
+            </Link>
+          </div>
+        </div>
       </div>
-      <div className="chat-bubble p-8 py-4 min-w-44">
-        <div className="badge badge-secondary">{routine.category.name}</div>
-        <h2 className="text-xl font-bold">{routine.title}</h2>
-        <p>{routine.description}</p>
-        <p className="text-xs">{newTime}</p>
-      </div>
-    </div>
+      <Modal
+        categories={categories}
+        opening={opening}
+        index={routine.id}
+        data={routine}
+        heading="Edit Routine"
+        submitLabel="Update"
+      />
+    </>
   ) : (
     <>
       <div className="chat chat-start text-black">
@@ -44,7 +79,13 @@ export default function Card({
           <p className="text-xs">{newTime}</p>
         </div>
       </div>
-      <Modal categories={categories} opening={opening} index={index} />
+      <Modal
+        categories={categories}
+        opening={opening}
+        index={index}
+        heading="New Routine"
+        submitLabel="Create"
+      />
     </>
   );
 }

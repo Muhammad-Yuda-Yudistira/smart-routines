@@ -9,8 +9,6 @@ export default function List({ routines, user, categories }) {
     startPoint = [...startPoint, routine.start_time];
     endPoint = [...endPoint, routine.end_time];
   });
-  console.log("startPoint:", startPoint);
-  console.log("endPoint:", endPoint);
 
   let startedPoint = convertTimeToMinute(startPoint[0]);
   startedPoint = convertToHuman(startedPoint);
@@ -59,7 +57,12 @@ export default function List({ routines, user, categories }) {
             return (
               <>
                 <li className="step" key={index}>
-                  <Card routine={routine} index={index} newTime={newTime} />
+                  <Card
+                    routine={routine}
+                    index={index}
+                    newTime={newTime}
+                    categories={categories}
+                  />
                 </li>
                 {!startPoint.includes(routine.end_time) &&
                   routine.end_time !== "00:00:00" && (

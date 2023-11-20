@@ -1,16 +1,23 @@
 import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
-const Modal = function ({ categories, opening, index }) {
+const Modal = function ({
+  categories,
+  opening,
+  index,
+  data = null,
+  heading,
+  submitLabel,
+}) {
   const { flash, errors } = usePage().props;
   const daysDefault = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    { id: 1, name: "Monday" },
+    { id: 2, name: "Tuesday" },
+    { id: 3, name: "Wednesday" },
+    { id: 4, name: "Thursday" },
+    { id: 5, name: "Friday" },
+    { id: 6, name: "Saturday" },
+    { id: 7, name: "Sunday" },
   ];
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState();
@@ -19,34 +26,67 @@ const Modal = function ({ categories, opening, index }) {
   const [endTime, setEndTime] = useState("");
   const [days, setDays] = useState([]);
 
+  const [oldStartTime, setOldStartTime] = useState("");
+  const [oldEndTime, setOldEndTime] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
-
-  if (errors.length == 0 && isSubmit) {
-    setTitle("");
-    setCategory(0);
-    setDescription("");
-    setStartTime("");
-    setEndTime("");
-    setDays([]);
-  }
-
+  const [buttonType, setButtonType] = useState("create");
+  
+		  
+  
   function handleSubmit(e) {
     e.preventDefault();
     const newRoutine = {
+		  id: data.id,
       title,
-      category,
-      description,
+	    description,
+      category_id: category,
       start_time: startTime,
       end_time: endTime,
       days,
+      oldStartTime,
+      oldEndTime
     };
-    router.post(route("routines.store"), newRoutine);
+
+    if (buttonType == "update") {
+		router.put(route("routines.update", { id: data.id }), newRoutine);
+		setButtonType('create')
+    } else {
+      router.post(route("routines.store"), newRoutine);
+    }
 
     setIsSubmit(true);
   }
 
   useEffect(() => {
-    if (flash.message && isSubmit) {
+    if (data) {
+      setTitle(data.title);
+      setCategory(data.category_id);
+      setDescription(data.description);
+      setStartTime(data.start_time);
+      setEndTime(data.end_time);
+      setDays(JSON.parse(data.days));
+
+      setOldStartTime(data.start_time);
+      setOldEndTime(data.end_time);
+
+      const categories = document.querySelector("#categories").options;
+      const daysDOM = document.querySelectorAll(
+        `#my_modal_5[index="${index}"] #days`
+      );
+
+      const category = categories[data.category_id];
+      category.selected = true;
+
+      daysDOM.forEach((day) => {
+        if (data.days.includes(day.value)) {
+          day.checked = true;
+        }
+      });
+
+      setButtonType("update");
+    }
+
+    if (flash.message && isSubmit && !errors) {
       setTitle("");
       setCategory();
       setDescription("");
@@ -54,7 +94,9 @@ const Modal = function ({ categories, opening, index }) {
       setEndTime("");
       setDays([]);
 
-      const isCheckeds = document.querySelectorAll("#days");
+      const isCheckeds = document.querySelectorAll(
+        `#my_modal_5[index="${index}"] #days`
+      );
       const categoriesDOM = document.querySelector("#categories");
 
       isCheckeds.forEach((isChecked) => {
@@ -71,7 +113,7 @@ const Modal = function ({ categories, opening, index }) {
     } else {
       return;
     }
-  });
+  }, [data]);
 
   return (
     <>
@@ -105,7 +147,7 @@ const Modal = function ({ categories, opening, index }) {
               <span>{flash.message}</span>
             </div>
           )}
-          <h3 className="font-bold text-3xl mb-6 text-center">New Routines</h3>
+          <h3 className="font-bold text-3xl mb-6 text-center">{heading}</h3>
           <form action="" method="post" onSubmit={handleSubmit}>
             <ul>
               <li className="pb-3">
@@ -116,6 +158,7 @@ const Modal = function ({ categories, opening, index }) {
                     className="input input-sm input-bordered"
                     name="title"
                     value={title}
+					defaultValue="nilai 1"
                     onChange={(e) => setTitle(e.target.value)}
                   />
                   <label className="label">
@@ -132,7 +175,7 @@ const Modal = function ({ categories, opening, index }) {
                   <select
                     id="categories"
                     className="select select-sm py-0 select-bordered"
-                    name="category"
+                    name="category_id"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                   >
@@ -140,7 +183,7 @@ const Modal = function ({ categories, opening, index }) {
                       Category
                     </option>
                     {categories &&
-                      categories.map((category, index) => {
+                      categories.map((category) => {
                         return (
                           <option key={category.id} value={category.id}>
                             {category.name}
@@ -149,7 +192,7 @@ const Modal = function ({ categories, opening, index }) {
                       })}
                   </select>
                   <label className="label">
-                    {errors.category && (
+                    {errors.category_id && (
                       <span className="label-text-alt text-red-600">
                         {errors.category}
                       </span>
@@ -229,18 +272,19 @@ const Modal = function ({ categories, opening, index }) {
                               type="checkbox"
                               className="checkbox checkbox-sm"
                               name="days"
-                              value={dayDefault}
+                              value={dayDefault.name}
                               onChange={(e) => {
-                                const addDay = e.target.value;
                                 if (e.target.checked) {
-                                  setDays([...days, addDay]);
+                                  setDays([...days, e.target.value]);
                                 } else {
-                                  setDays(days.filter((day) => day !== addDay));
+                                  setDays(
+                                    days.filter((day) => day !== e.target.value)
+                                  );
                                 }
                               }}
                             />
                             <span className="label-text ml-2">
-                              {dayDefault}
+                              {dayDefault.name}
                             </span>
                           </label>
                         </div>
@@ -258,8 +302,9 @@ const Modal = function ({ categories, opening, index }) {
                 <button
                   className="btn btn-secondary btn-sm w-[450px]"
                   method="submit"
+                  data-action={buttonType}
                 >
-                  Add
+                  {submitLabel}
                 </button>
               </div>
             </ul>

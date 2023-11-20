@@ -34,6 +34,10 @@ class RoutineFactory extends Factory
       return $user->id;
     });
 
+    $randomDays = collect(range(1, 7))->random(mt_rand(1, 3))->map(function ($day) {
+      return fake()->dayOfWeek('1 week');
+    })->toArray();
+
     return [
       'title' => fake()->sentence(),
       'description' => fake()->paragraph(),
@@ -41,7 +45,7 @@ class RoutineFactory extends Factory
       'user_id' => $userIds->random(),
       'start_time' => $start_time,
       'end_time' => $end_time,
-      'days' => json_encode(fake()->words(mt_rand(1, 7))),
+      'days' => json_encode($randomDays),
     ];
   }
 }
