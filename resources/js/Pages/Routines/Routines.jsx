@@ -1,4 +1,4 @@
-import { Head, usePage } from "@inertiajs/react";
+import { Head, usePage, Link } from "@inertiajs/react";
 import List from "@/Components/Routines/List";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Navbar from "@/Layouts/Navbar";
@@ -18,7 +18,6 @@ export default function Routines({ auth, categories, routines = null }) {
 
   return (
     <>
-      {auth.user ? (
         <AuthenticatedLayout
           user={auth.user}
           header={
@@ -27,7 +26,11 @@ export default function Routines({ auth, categories, routines = null }) {
             </h2>
           }
         >
-          <Head title="Routines" />
+          <Head>
+            <title>Routines</title>
+            <meta head-key="description" name="description" content="This is a page specific description" />
+          </Head>
+          
           <div className="container-fluid text-center p-10 px-28 box-border">
             {flash.message && (
               <div className="alert alert-success h-12 flex mb-3">
@@ -58,18 +61,6 @@ export default function Routines({ auth, categories, routines = null }) {
             />
           </div>
         </AuthenticatedLayout>
-      ) : (
-        <>
-          <Head title="Routines" />
-          <Navbar />
-          <div className="container text-center m-10 mx-16 w-full box-border">
-            <div className="title-box mb-10">
-              <h1 className="text-5xl">Your Routines</h1>
-              <p>{currentTime.toDateString()}</p>
-            </div>
-          </div>
-        </>
-      )}
     </>
   );
 }

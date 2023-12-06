@@ -19,8 +19,8 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Routines/Routines');
-});
+    return Inertia::render('Homepage/Homepage');
+})->middleware('guest');
 
 Route::get('/routines', function () {
     return Inertia::render('Routines/Routines');

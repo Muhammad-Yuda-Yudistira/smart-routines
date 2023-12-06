@@ -76,6 +76,7 @@ class RoutineTest extends TestCase
 
     $response->assertRedirect()->assertStatus(302);
     $response->assertSessionHas('message', 'New routine has been created!');
+    $response->assertSessionHasNoErrors();
 
     $this->assertDatabaseHas('routines', [
       'title' => 'Test Routine',
@@ -113,6 +114,7 @@ class RoutineTest extends TestCase
 
     $response->assertRedirect()->assertStatus(302);
     $response->assertSessionHas('message', 'Routine has been deleted!');
+    $response->assertSessionHasNoErrors();
   }
   
   public function test_delete_routine_unauthenticated() 
@@ -147,8 +149,8 @@ class RoutineTest extends TestCase
 	$response = $this->put(route('routines.update', ['routine' => $this->routine->id]), $newRoutine);
 	
 	$response->assertStatus(200);
-	
 	$response->assertSessionHas("message", "Routine has been updated!");
+  $response->assertSessionHasNoErrors();
 	
 	$this->assertDatabaseHas('routines', [
 		'title' => 'Title baru',
