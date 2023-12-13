@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\GraphicRoutineController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,13 +21,15 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 
 Route::get('/', function () {
     return Inertia::render('Homepage/Homepage');
-})->middleware('guest');
+})->middleware('guest')->name('homepage');
 
 Route::get('/routines', function () {
     return Inertia::render('Routines/Routines');
 })->middleware('guest');
 
 Route::resource('/dashboard/routines', RoutineController::class)->middleware('auth');
+// nanti grouping berdasarkan auth
+Route::get('/dashboard/graphic', [GraphicRoutineController::class, 'index'])->name('graphic.routines.index')->middleware('auth');
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [

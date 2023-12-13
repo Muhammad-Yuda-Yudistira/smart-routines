@@ -4,7 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Navbar from "@/Layouts/Navbar";
 import { useEffect, useState } from "react";
 
-export default function Routines({ auth, categories, routines = null }) {
+export default function Routines({ auth, title, categories, routines = null }) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const { flash } = usePage().props;
 
@@ -21,17 +21,17 @@ export default function Routines({ auth, categories, routines = null }) {
         <AuthenticatedLayout
           user={auth.user}
           header={
-            <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-              Routines
+            <h2 className="font-semibold text-2xl text-gray-600 leading-tight" style={{fontFamily:'Smooch Sans'}}>
+              <span className="font-sans">🧙🏿‍♂️</span> {title}
             </h2>
           }
         >
           <Head>
-            <title>Routines</title>
+            <title>{title}</title>
             <meta head-key="description" name="description" content="This is a page specific description" />
           </Head>
           
-          <div className="container-fluid text-center p-10 px-28 box-border">
+          <div className="container-fluid text-center p-10 px-28 box-border selection:bg-white selection:text-gray-700">
             {flash.message && (
               <div className="alert alert-success h-12 flex mb-3">
                 <svg
@@ -50,9 +50,9 @@ export default function Routines({ auth, categories, routines = null }) {
                 <span className="">{flash.message}</span>
               </div>
             )}
-            <div className="title-box mb-10">
-              <h1 className="text-5xl">Your Routines</h1>
-              <p>{currentTime.toDateString()}</p>
+            <div className="title-box mb-2">
+              <h1 className="text-5xl" style={{fontFamily:'Nova Square'}}>Your Routines</h1>
+              <p className="text-lg" style={{fontFamily:'Smooch Sans'}}>{currentTime.toDateString()}</p>
             </div>
             <List
               routines={routines}

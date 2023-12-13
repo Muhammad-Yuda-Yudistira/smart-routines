@@ -20,6 +20,7 @@ class RoutineController extends Controller
     $categories = Category::all();
 
     return Inertia::render('Routines/Routines', [
+      'title' => 'Routines',
       'routines' => $routines,
       'categories' => $categories
     ]);

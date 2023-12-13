@@ -15,7 +15,7 @@ export default function List({ routines, user, categories }) {
 
   return (
     <>
-      <ul className="steps steps-vertical w-full">
+      <ul className="steps steps-vertical w-full text-slate-300">
         {startPoint[0] !== "00:00:00" && (
           <li className="step" key="0">
             <Card
@@ -78,7 +78,9 @@ export default function List({ routines, user, categories }) {
               </>
             );
           })}
-        <div className="step">00:00</div>
+        <div className="step text-red-800" style={{fontFamily:'Smooch Sans'}}>
+          <p className="text-lg text-slate-500 opacity-9">00:00</p>
+        </div>
       </ul>
     </>
   );

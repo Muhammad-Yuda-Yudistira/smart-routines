@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react';
 import { gsap } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import LoadingPage from '@/Layouts/LoadingPage';
+import "@/../css/home.css";
 
 export default function Homepage()
 {

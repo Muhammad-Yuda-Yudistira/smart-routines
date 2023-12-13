@@ -19,6 +19,7 @@ const Modal = function ({
     { id: 6, name: "Saturday" },
     { id: 7, name: "Sunday" },
   ];
+  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState();
   const [description, setDescription] = useState("");
@@ -36,7 +37,6 @@ const Modal = function ({
   function handleSubmit(e) {
     e.preventDefault();
     const newRoutine = {
-		  id: data.id,
       title,
 	    description,
       category_id: category,
@@ -48,7 +48,8 @@ const Modal = function ({
     };
 
     if (buttonType == "update") {
-		router.put(route("routines.update", { id: data.id }), newRoutine);
+    newRoutine.id = id;
+		router.put(route("routines.update", { id: newRoutine.id }), newRoutine);
 		setButtonType('create')
     } else {
       router.post(route("routines.store"), newRoutine);
@@ -59,6 +60,7 @@ const Modal = function ({
 
   useEffect(() => {
     if (data) {
+      setId(data.id);
       setTitle(data.title);
       setCategory(data.category_id);
       setDescription(data.description);
@@ -119,10 +121,10 @@ const Modal = function ({
     <>
       <dialog
         id="my_modal_5"
-        className="modal modal-bottom sm:modal-middle"
+        className="modal modal-bottom sm:modal-middle text-2xl"
         index={index}
       >
-        <div className="modal-box">
+        <div className="modal-box bg-teal-900">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -147,15 +149,15 @@ const Modal = function ({
               <span>{flash.message}</span>
             </div>
           )}
-          <h3 className="font-bold text-3xl mb-6 text-center">{heading}</h3>
+          <h3 className="font-bold text-6xl mb-6 text-center text-slate-300">{heading}</h3>
           <form action="" method="post" onSubmit={handleSubmit}>
-            <ul>
+            <ul className="">
               <li className="pb-3">
                 <div className="form-control w-full">
                   <input
                     type="text"
                     placeholder="Title"
-                    className="input input-sm input-bordered"
+                    className="input input-sm input-bordered border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
                     name="title"
                     value={title}
 					defaultValue="nilai 1"
@@ -174,7 +176,7 @@ const Modal = function ({
                 <div className="form-control w-full">
                   <select
                     id="categories"
-                    className="select select-sm py-0 select-bordered"
+                    className="select select-sm py-0 select-bordered border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
                     name="category_id"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
@@ -203,7 +205,7 @@ const Modal = function ({
               <li>
                 <div className="form-control">
                   <textarea
-                    className="textarea textarea-sm textarea-bordered w-full"
+                    className="textarea textarea-sm textarea-bordered w-full border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
                     placeholder="Description"
                     name="description"
                     value={description}
@@ -225,7 +227,7 @@ const Modal = function ({
                   </label>
                   <input
                     type="time"
-                    className="input input-sm input-bordered w-full"
+                    className="input input-sm input-bordered w-full border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
                     name="startTime"
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
@@ -246,7 +248,7 @@ const Modal = function ({
                   </label>
                   <input
                     type="time"
-                    className="input input-sm input-bordered w-full"
+                    className="input input-sm input-bordered w-full border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
                     name="endTime"
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}
@@ -270,7 +272,7 @@ const Modal = function ({
                             <input
                               id="days"
                               type="checkbox"
-                              className="checkbox checkbox-sm"
+                              className="checkbox checkbox-sm border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
                               name="days"
                               value={dayDefault.name}
                               onChange={(e) => {
@@ -300,8 +302,8 @@ const Modal = function ({
               </li>
               <div className="modal-action justify-center w-full">
                 <button
-                  className="btn btn-secondary btn-sm w-[450px]"
-                  method="submit"
+                  className="btn btn-sm w-[450px] border-0 bg-white hover:bg-gradient-to-tr hover:from-slate-700 hover:from-10 hover:via-slate-300 hover:via-20 hover:to-white hover:to-80 hover:text-slate-500 text-slate-400 text-xl"
+                  type="submit"
                   data-action={buttonType}
                 >
                   {submitLabel}

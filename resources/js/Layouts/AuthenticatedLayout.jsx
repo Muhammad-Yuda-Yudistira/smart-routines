@@ -14,7 +14,7 @@ export default function Authenticated({ user, header, children }) {
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
-                        <div className="flex">
+                        <div id="navbar" className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/" className="w-[40px]">
                                     <ApplicationLogo className="block h-9 w-full fill-current text-gray-800" />
@@ -22,19 +22,35 @@ export default function Authenticated({ user, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink
+                                {/*<NavLink
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >
                                     Dashboard
+                                </NavLink>*/}
+                            </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink
+                                    href={route("routines.index")}
+                                    active={route().current("routines.index")}
+                                >
+                                    Routines
                                 </NavLink>
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink
-                                    href="http://smart-routines.test/dashboard/routines"
-                                    active={route().current("routines.index")}
+                                    href={route("graphic.routines.index")}
+                                    active={route().current("graphic.routines.index")}
                                 >
-                                    Routines
+                                    Graphic
+                                </NavLink>
+                            </div>
+                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink
+                                    // href={route("resolutions.index")}
+                                    // active={route().current("resolutions.index")}
+                                >
+                                    Resolutions
                                 </NavLink>
                             </div>
                         </div>
@@ -46,7 +62,8 @@ export default function Authenticated({ user, header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                id="menu-profile"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-slate-500 bg-white hover:text-red-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
 

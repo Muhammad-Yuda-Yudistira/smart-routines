@@ -1,6 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
-import '../css/home.css';
+import '../css/global.css';
 import '../css/loading_page.css';
 
 import { createRoot } from 'react-dom/client';
