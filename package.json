@@ -21,6 +21,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "gsap": "^3.12.3"
+        "gsap": "^3.12.3",
+        "react-shepherd": "^4.2.0"
     }
 }

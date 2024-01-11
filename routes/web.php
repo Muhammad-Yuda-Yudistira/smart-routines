@@ -43,6 +43,9 @@ Route::middleware('auth')->group(function() {
 
 // common access
 Route::get('/guides', [GuideController::class, 'index'])->name('guides.index');
+Route::get('/demo', function() {
+    return Inertia::render('Demo');
+});
 
 // oauth google
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');

@@ -21,6 +21,10 @@ button, .clicker {
 	cursor: url('http://smart-routines.test/assets/cursors/the-elder-skyrim-precision.cur'), auto !important;
 }
 
+.viewer {
+	cursor: url(assets/cursors/FLYFF-CHINESE-MAGNIFYING-GLASS.ani), url(https://cur.cursors-4u.net/games/gam-11/gam1070.png), auto !important;
+}
+
 #navbar, #menu-profile, #menu-sub-profile, #my_modal_5 {
 	font-family: 'Smooch Sans';
 }
