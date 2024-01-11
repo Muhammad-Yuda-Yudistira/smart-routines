@@ -78,6 +78,10 @@ export default function Homepage()
                       <p>Modern games for real game and very fun games for get achievements <span id="clock-icon">⏰</span></p>
                     </span>
                   </div>
+                  <div className="py-10">
+                    <Link href={route('guides.index')} className="clicker text-4xl inline-block">📘</Link>
+                    <div className="uppercase text-base text-blue-300 font-semibold">Guide</div>
+                  </div>
                 </section>
               </div>
              <section id="section-2" className="flex">

@@ -5,18 +5,23 @@ import Card from "./Card";
 export default function List({ routines, user, categories }) {
   let startPoint = [];
   let endPoint = [];
-  routines.map((routine) => {
+  let startedPoint = [];
+
+  if(routines.length > 0) 
+  {
+    routines.map((routine) => {
     startPoint = [...startPoint, routine.start_time];
     endPoint = [...endPoint, routine.end_time];
-  });
+    });
 
-  let startedPoint = convertTimeToMinute(startPoint[0]);
-  startedPoint = convertToHuman(startedPoint);
+    startedPoint = convertTimeToMinute(startPoint[0]);
+    startedPoint = convertToHuman(startedPoint);
+  }
 
   return (
     <>
       <ul className="steps steps-vertical w-full text-slate-300">
-        {startPoint[0] !== "00:00:00" && (
+        {startPoint[0] != "00:00:00" && routines.length > 0 ? (
           <li className="step" key="0">
             <Card
               opening="00:00"
@@ -24,8 +29,15 @@ export default function List({ routines, user, categories }) {
               newTime={startedPoint}
             />
           </li>
-        )}
-        {routines &&
+        ) :
+        (<li className="step" key="0">
+            <Card
+              opening="00:00"
+              categories={categories}
+              newTime="24 Hour"
+            />
+          </li>)}
+        {routines.length > 0 &&
           routines.map((routine, index) => {
             index = index + 1;
             // waktu dalam menit
@@ -59,6 +71,7 @@ export default function List({ routines, user, categories }) {
                 <li className="step" key={index}>
                   <Card
                     routine={routine}
+                    days={routine.days}
                     index={index}
                     newTime={newTime}
                     categories={categories}
@@ -95,7 +108,15 @@ function convertTimeToMinute(time, position) {
   return inMinutes;
 }
 function minuteDifference(minuteStart, minuteEnd) {
-  return minuteEnd - minuteStart;
+  console.log("start:",minuteStart)
+  console.log("end:",minuteEnd)
+  if(minuteEnd < minuteStart)
+  {
+    // 24 - A = 1 jam + B = 4 jam
+    return (1440 - minuteStart) + minuteEnd
+  } else {
+    return minuteEnd - minuteStart;
+  }
 }
 function convertToHuman(minute) {
   let hour = minute / 60;

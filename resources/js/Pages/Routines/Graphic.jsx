@@ -62,7 +62,7 @@ export default function Graphic({auth, title, routines, categories}) {
                         		<h1 id="title" className="text-4xl">Your Graphic</h1>
                         		<small id="title-tag" className="italic text-lg">Count of category in your routines</small>
                         	</div>
-                        	<main id="routine-list" className="graphic-box w-[45%] m-auto" style={{fontFamily: ''}}>
+                        	<main id="routine-list" className="graphic-box w-[60%] m-auto bg-gray-200 p-4 pt-8 border-2 border-gray-900 border-dashed" style={{fontFamily: ''}}>
                         		<ul id="graphic-list" className="pb-10 text-xl text-start">
                         			{categories.map(category => {
                         				let activities = 0, durations = 0
@@ -79,18 +79,19 @@ export default function Graphic({auth, title, routines, categories}) {
                         				})
                         				const durationsInHuman = convertSecondsToHuman(durations)
                         				return (
-		                        			<li key={category.id} className="pb-2">
+		                        			<li key={category.id} className="pb-4">
 		                        				<span className="font-bold non-italic">
 		                        					<span className="non-italic text-sm opacity-90 pr-2">🔱</span> 
 		                        					{category.name} ➡
 		                        				</span> 
-		                        				<p className="inline italic"> count activities: <span className="text-yellow-600">{activities}</span>, count durations: <span className="text-blue-400">{durationsInHuman}</span>.</p>		                        			
+		                        				<p className="inline italic text-gray-500"> count activities: <span className="text-yellow-600">{activities}</span>, count durations: <span className="text-blue-500">{durationsInHuman}</span>.</p>
+		                        				<hr className="border-b-orange-300 border-b-2"/>                      			
 		                        			</li>
                         					)
                         			})}
                         		</ul>
                         		<div className="graphic-sum">
-                        			<h3 className="text-lg italic">
+                        			<h3 className="text-lg italic text-gray-500">
                         				<span className="non-italic pr-1">⚜ </span> 
                         				Total activities: <span className="text-yellow-600">{routines.length}</span>, total durations: <span className="text-yellow-600">{totalDuration}</span>, remaining free time: <span className="text-yellow-600">{remainingTime}</span>
                         			</h3>

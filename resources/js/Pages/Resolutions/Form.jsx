@@ -16,6 +16,8 @@ export default function Form({title,categories,resolution=null,auth})
 
 	const {flash,errors} = usePage().props;
 
+	let year = new Date().getFullYear()
+
 	useEffect(() => {
 		if(resolution)
 		{
@@ -134,8 +136,11 @@ export default function Form({title,categories,resolution=null,auth})
 														<label for="title" className="mr-3 font-semibold capitalize">title:</label>
 													</td>
 													<td className="w-full">
-														<input type="text" name="title" value={titleRes} onChange={handleChange} placeholder="Type here" className="input input-sm input-info input-bordered w-full" id="title" />
+														<input type="text" name="title" value={titleRes} onChange={handleChange} placeholder={"Example: Resolution the next 10 years. Resolution the next 5 years. Resolution " + year} className="input input-sm input-info input-bordered w-full" id="title" />
 														{errors.title && <small className="text-rose-500">{errors.title}</small>}
+														<div className="label">
+														    <span className="label-text text-yellow-600">*reommendation: create 3 resolutions for the next 10 year, the next 5 year and {year} or create 1 for {year} only.</span>
+														 </div>
 													</td>
 												</li>
 											</tr>
@@ -146,9 +151,9 @@ export default function Form({title,categories,resolution=null,auth})
 													</td>
 													<td>
 														<input type="radio" onChange={handleChange} checked={type == 'Obligation' ? true : false} id="obligation" name="type" value="Obligation" className="radio radio-info mr-2" />
-														<label for='obligation'>obligation</label>
+														<label for='obligation' title="Work or Study">obligation</label>
 														<input type="radio" onChange={handleChange} checked={type == 'Lifestyle' ? true : false} id="lifestyle" name="type" value="Lifestyle" className="radio radio-info ml-5 mr-2" />
-														<label for='lifestyle'>lifestyle</label>
+														<label for='lifestyle' title="Free Time">lifestyle</label>
 														{errors.type && <><br/><small className="text-rose-500">{errors.type}</small></>}
 													</td>
 												</li>
@@ -160,11 +165,11 @@ export default function Form({title,categories,resolution=null,auth})
 													</td>
 													<td>
 														<input type="radio" id="weekly" name="period" checked={period == 'Weekly' ? true : false} onChange={handleChange} value="Weekly" className="radio radio-info mr-2" />
-														<label for='weekly'>weekly</label>
+														<label for='weekly' title="not-recommend">weekly</label>
 														<input type="radio" id="monthly" name="period" checked={period == 'Monthly' ? true : false} onChange={handleChange} value="Monthly" className="radio radio-info ml-5 mr-2" />
-														<label for='monthly'>monthly</label>
+														<label for='monthly' title="un-common">monthly</label>
 														<input type="radio" id="yearly" name="period" checked={period == 'Yearly' ? true : false} onChange={handleChange} value="Yearly" className="radio radio-info ml-5 mr-2" />
-														<label for='yearly'>yearly</label>
+														<label for='yearly' title="common">yearly</label>
 														{errors.period && <><br/><small className="text-rose-500">{errors.period}</small></>}
 													</td>
 												</li>
@@ -195,8 +200,11 @@ export default function Form({title,categories,resolution=null,auth})
 														<label for="goal" className="mr-3 font-semibold capitalize">goal:</label>
 													</td>
 													<td className="w-full">
-														<textarea id="goal" name="goal" onChange={handleChange} value={goal} className="textarea textarea-sm textarea-bordered textarea-info w-full" placeholder="Type Here.."></textarea>
+														<textarea id="goal" name="goal" onChange={handleChange} value={goal} className="textarea textarea-sm textarea-bordered textarea-info w-full" placeholder="Example: Work in google"></textarea>
 														{errors.goal && <small className="text-rose-500">{errors.goal}</small>}
+														<div className="label">
+														    <span className="label-text text-yellow-600">*1 resolution for 1 goals. if you have 3 goals please create 3 resolution with the same title. recommendation: max 3 goals, min 1 goals.</span>
+														 </div>
 													</td>
 													
 												</li>
@@ -208,8 +216,11 @@ export default function Form({title,categories,resolution=null,auth})
 														<label for="description"className="mr-3 font-semibold capitalize">description:</label>
 													</td>
 													<td className="w-full">
-														<textarea id="description" name="description" onChange={handleChange} value={description} className="textarea textarea-sm textarea-info textarea-bordered w-full" placeholder="Type Here.."></textarea>
+														<textarea id="description" name="description" onChange={handleChange} value={description} className="textarea textarea-sm textarea-info textarea-bordered w-full" placeholder="Example: 1.To be CTO in google company. 2.Create my project until success return money the 7 million rupiah per mounth, to apply for a job at google."></textarea>
 														{errors.description && <small className="text-rose-500">{errors.description}</small>}
+														<div className="label">
+															<span className="label-text text-yellow-600">*this is detail for your goal, describe here. don't too long; short, dense and clear. create to point: 1.detail your goal 2.how to way finished your goal.</span>
+														 </div>
 													</td>
 												</li>
 											</tr>
@@ -227,6 +238,9 @@ export default function Form({title,categories,resolution=null,auth})
 														<input id="image" type="file" name="image" onChange={handleChange} className="file-input file-input-sm file-input-bordered file-input-info w-full max-w-xs" />
 														<small className="block">{image.name}</small>
 														{errors.image && <small className="text-rose-500">{errors.image}</small>}
+														<div className="label">
+														    <span className="label-text text-yellow-600">*add image for motivation your goals. image must to related by your goal. example: Google Company Image.</span>
+														 </div>
 													</td>
 												</li>
 											</tr>

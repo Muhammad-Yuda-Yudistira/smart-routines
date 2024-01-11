@@ -5,7 +5,8 @@ import Title from '@/Components/Title';
 
 export default function Index({auth,title,data,routines}) {
   const {flash} = usePage().props;
-  console.log('data:', '../assets/' + data[0].image)
+  console.log("data:", data)
+  console.log("routines:", routines)
 	return (
 		<>
 			<AuthenticatedLayout
@@ -31,20 +32,25 @@ export default function Index({auth,title,data,routines}) {
                 </Title>
                 <div>
                     <Link className="btn capitalize mb-10 hover:text-slate-300" as="button" type="button" href={route('resolutions.create')}>add new resolution ➕</Link>
+                    <hr className="border-b-4"/>
                 </div>
                 <main style={{fontFamily:'Smooch Sans'}}>
+                {data <= 0 && (<h3 className="text-4xl my-28 text-center opacity-80">Resolution Empty</h3>)}
                 {data.map(resolution => {
                     let newUrlImg = "/storage/" + resolution.image;
                     return(
                             <ul className="mb-12">
                                 <div>
-                                    <li>
-                                        <h2 className="text-slate-400 capitalize font-bold text-4xl mb-6" style={{fontFamily:'Nova Square'}}>{resolution.title}</h2>
+                                    <li className="inline-block mb-7 mt-3">
+                                        <h2 className="text-slate-400 capitalize font-bold text-4xl inline" style={{fontFamily:'Nova Square'}}>{resolution.title}</h2>
+                                    </li>
+                                    <li className="inline pl-4">
+                                        <p className="text-blue-500 uppercase inline">{resolution.goal}</p>
                                     </li>
                                 </div>
                                 <div>
-                                    <li className="w-300 block">
-                                        <img src={newUrlImg} alt="Image for motivation goals" className="float-left pr-6" width="300" />
+                                    <li className="w-300 h-300 block">
+                                        <img src={newUrlImg} alt="Image for motivation goals" className="float-left pr-6" width="300" height="300"/>
                                     </li>
                                     <div className="mb-2">
                                         <Link href={route('resolutions.edit', {id:resolution.id})} method="get" as="button" type="button" className="btn btn-sm btn-outline uppercase mr-4 rounded-tr-none text-sm btn-disabled"><span className="text-xl">🔲</span>edit</Link>
@@ -57,10 +63,7 @@ export default function Index({auth,title,data,routines}) {
                                         <p className="text-slate-400 capitalize"><span className="font-semibold text-xl">duration type: </span>{resolution.period}</p>
                                     </li>
                                     <li>
-                                        <p className="text-slate-400 capitalize"><span className="font-semibold text-xl">category: </span>{resolution.category_id}</p>
-                                    </li>
-                                    <li>
-                                        <p className="text-slate-400"><div className="text-xl font-semibold capitalize">goal: </div>{resolution.goal}</p>
+                                        <p className="text-slate-400 capitalize"><span className="font-semibold text-xl">category: </span>{resolution.category.name}</p>
                                     </li>
                                     <li>
                                         <p className="text-slate-400"><div className="text-xl font-semibold capitalize">description: </div>{resolution.description}</p>
@@ -71,9 +74,9 @@ export default function Index({auth,title,data,routines}) {
                                         {
                                           routines.filter(routine => routine.category_id === resolution.category_id).length > 0 
                                             ? 
-                                            routines.filter(routine => routine.category_id === resolution.category_id).map(routine => <li key={routine.id} className="ml-5 text-2xl list-disc">{routine.title}</li>) 
+                                            routines.filter(routine => routine.category_id === resolution.category_id).map(routine => <Link href={"/dashboard/routines#" + routine.id} className="text-yellow-500 underline"><li key={routine.id} className="clicker inline text-xl">{"- " + routine.title}</li></Link>) 
                                             :
-                                            <li className="text-rose-700 opacity-80 text-semibold uppercase">Routines not found!</li>
+                                            <li className="text-rose-700 opacity-60 text-semibold uppercase text-3xl py-12 text-center">Routines not found!</li>
                                         }
                                       </ul>
                                     </li>

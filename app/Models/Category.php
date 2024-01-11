@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function resolutions() {
-        return $this->hasMany(Resolution::class);
-    }
+    // public function resolutions() {
+    //     return $this->hasMany(Resolution::class);
+    // }
 }

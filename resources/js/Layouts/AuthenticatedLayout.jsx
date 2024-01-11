@@ -31,6 +31,7 @@ export default function Authenticated({ user, header, children }) {
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink
+                                    className="clicker"
                                     href={route("routines.index")}
                                     active={route().current("routines.index")}
                                 >
@@ -39,20 +40,32 @@ export default function Authenticated({ user, header, children }) {
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink
+                                    className="clicker"
                                     href={route("graphic.routines.index")}
                                     active={route().current("graphic.routines.index")}
                                 >
                                     Graphic
                                 </NavLink>
                             </div>
-                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink
+                                    className="clicker"
                                     href={route("resolutions.index")}
                                     active={route().current("resolutions.index")}
                                 >
                                     Resolutions
                                 </NavLink>
                             </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink
+                                    className="clicker"
+                                    href={route("guides.index")}
+                                    active={route().current("guides.index")}
+                                >
+                                    Guides
+                                </NavLink>
+                            </div>
+                            
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">

@@ -17,7 +17,7 @@ class ResolutionController extends Controller
      */
     public function index()
     {
-        $data = Resolution::where('user_id', auth()->user()->id)->latest()->get();
+        $data = Resolution::where('user_id', auth()->user()->id)->latest()->with('category')->get();
         $routines = Routine::where('user_id', auth()->user()->id)->get();
         return Inertia::render('Resolutions/Index', [
             'title' => 'Resolution',
@@ -65,7 +65,7 @@ class ResolutionController extends Controller
             'user_id' => auth()->user()->id
         ]);
         // PR: redirect ke resolutions page
-        return redirect()->back()->with('message', 'Resolution has been created!');
+        return redirect()->route('resolutions.index')->with('message', 'Resolution has been created!');
     }
 
     /**

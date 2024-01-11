@@ -4,24 +4,34 @@ import { useState } from "react";
 
 export default function Card({
   routine = null,
+  days = null,
   index = 0,
   newTime,
   opening = null,
   categories = null,
 }) {
+  days = JSON.parse(days)
+
   function handleModalBox(e) {
     const keyModal = e.target.getAttribute("index");
     document.querySelector(`#my_modal_5[index="${keyModal}"]`).showModal();
   }
   return routine !== null ? (
     <>
-      <div className="chat chat-start w-full text-black text-start flex-1" style={{fontFamily:'Smooch Sans'}}>
+      <div id={routine.id} className="chat chat-start w-full text-black text-start flex-1" style={{fontFamily:'Smooch Sans'}}>
         <div className="chat-header pl-4">
           <time className="text-lg opacity-50 text-slate-700">{routine.start_time}</time>
         </div>
         <div className="chat-bubble p-8 py-4 min-w-44 bg-teal-900">
           <div className="badge bg-white mb-3 text-xl rounded-sm py-3 border-0">
             {routine.category.name}
+          </div>
+          <div>
+            {days.map(day => {
+              return(
+                  <div className="badge badge-neutral mr-1 rounded-none">{day}</div>
+                )
+            })}
           </div>
           <h2 className="text-4xl font-medium text-teal-600">{routine.title}</h2>
           <p className="text-xl">{routine.description}</p>

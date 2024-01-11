@@ -1,8 +1,9 @@
 import { Link } from "@inertiajs/react";
 
-export default function Navbar() {
+export default function Navbar({user}) {
+    console.log('user:', user)
     return (
-        <div className="navbar bg-secondary text-secondary-content">
+        <div className="navbar bg-dark text-secondary-content shadow-2xl shadow-white">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -26,7 +27,7 @@ export default function Navbar() {
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                     >
                         <li>
-                            <a>Item 1</a>
+                            <a>Guides</a>
                         </li>
                         <li>
                             <a>Parent</a>
@@ -44,45 +45,31 @@ export default function Navbar() {
                         </li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">
+                <Link className="btn btn-ghost normal-case text-xl" href={route('homepage')}>
                     Smart Routines
-                </a>
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <a>Item 1</a>
-                    </li>
-                    <li tabIndex={0}>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li>
-                                    <a>Submenu 1</a>
-                                </li>
-                                <li>
-                                    <a>Submenu 2</a>
-                                </li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li>
-                        <a>Item 3</a>
+                        <Link href={route('guides.index')}>Guides</Link>
                     </li>
                 </ul>
             </div>
             <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1">
-                    <li>
-                        <Link href="/login" as="button">
-                            Login
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/register" as="button">
-                            Signup
-                        </Link>
-                    </li>
+                    {user ? (<li>
+                                <Link href={route('dashboard')}>Dashboard</Link>
+                            </li>)
+                    :
+                    (<>
+                        <li>
+                            <Link href="/login" as="button">Login</Link>
+                        </li>
+                        <li>
+                            <Link href="/register" as="button">Register</Link>
+                        </li>
+                    </>)}
                 </ul>
             </div>
         </div>

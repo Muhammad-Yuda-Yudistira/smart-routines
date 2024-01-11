@@ -46,7 +46,7 @@ class RoutineController extends Controller
       'start_time' => ['required', Rule::unique('routines')->where(function($query) {
         return $query->where('user_id', auth()->user()->id);
       })],
-      'end_time' => ['required', 'after:start_time', Rule::unique('routines')->where(function($query) {
+      'end_time' => ['required', Rule::unique('routines')->where(function($query) {
         return $query->where('user_id', auth()->user()->id);
       })],
       'days' => 'required|array',

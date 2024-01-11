@@ -17,7 +17,7 @@
 /*
 url(https://cur.cursors-4u.net/games/gam-14/gam1384.cur),
 */
-button {
+button, .clicker {
 	cursor: url('http://smart-routines.test/assets/cursors/the-elder-skyrim-precision.cur'), auto !important;
 }
 
