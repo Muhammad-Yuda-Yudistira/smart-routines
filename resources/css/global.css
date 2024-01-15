@@ -1,0 +1,34 @@
+@font-face {
+	font-family: "Nova Square";
+	src: url('http://smart-routines.test/assets/fonts/Nova_Square/NovaSquare-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: "Smooch Sans";
+	src: url('assets/fonts/Smooch_Sans/SmoochSans-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+	font-family: "Vina Sans";
+	src: url('assets/fonts/Vina_Sans/VinaSans-Regular.ttf') format('truetype');
+}
+
+* {
+	cursor: url('assets/cursors/the-elder-skyrim.ani'), url(https://cur.cursors-4u.net/games/gam-14/gam1380.png), auto !important;
+}
+/*
+url(https://cur.cursors-4u.net/games/gam-14/gam1384.cur),
+*/
+button, .clicker {
+	cursor: url('http://smart-routines.test/assets/cursors/the-elder-skyrim-precision.cur'), auto !important;
+}
+
+.viewer {
+	cursor: url(assets/cursors/FLYFF-CHINESE-MAGNIFYING-GLASS.ani), url(https://cur.cursors-4u.net/games/gam-11/gam1070.png), auto !important;
+}
+
+#navbar, #menu-profile, #menu-sub-profile, #my_modal_5 {
+	font-family: 'Smooch Sans';
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+	background-color: #134e4a;
+}
