@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "Nova Square";
-	src: url('http://smart-routines.test/assets/fonts/Nova_Square/NovaSquare-Regular.ttf') format('truetype');
+	src: url('assets/fonts/Nova_Square/NovaSquare-Regular.ttf') format('truetype');
 }
 @font-face {
 	font-family: "Smooch Sans";
@@ -18,7 +18,7 @@
 url(https://cur.cursors-4u.net/games/gam-14/gam1384.cur),
 */
 button, .clicker {
-	cursor: url('http://smart-routines.test/assets/cursors/the-elder-skyrim-precision.cur'), auto !important;
+	cursor: url('assets/cursors/the-elder-skyrim-precision.cur'), auto !important;
 }
 
 .viewer {
