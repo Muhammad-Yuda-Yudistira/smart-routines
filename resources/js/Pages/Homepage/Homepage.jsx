@@ -6,7 +6,7 @@ import LoadingPage from '@/Layouts/LoadingPage';
 import "@/../css/home.css";
 import "/node_modules/shepherd.js/dist/css/shepherd.css";
 import { ShepherdTour, ShepherdTourContext } from 'react-shepherd';
-import newSteps from '@/Pages/steps';
+// import newSteps from '@/Pages/steps';
 
 const tourOptions = {
   defaultStepOptions: {
@@ -77,9 +77,9 @@ export default function Homepage()
               </div>
               <div id="hero-homepage" className="container text-center w-full m-10">
                 <section id="section-1">
-                  <ShepherdTour steps={newSteps} tourOptions={tourOptions}>
+                  {/*<ShepherdTour steps={newSteps} tourOptions={tourOptions}>
                     <Button />
-                  </ShepherdTour>
+                  </ShepherdTour>*/}
 
                   <div className="title-box mb-16">
                     <h1 id="title" className="text-5xl text-gray-300">Smart Routines</h1>
