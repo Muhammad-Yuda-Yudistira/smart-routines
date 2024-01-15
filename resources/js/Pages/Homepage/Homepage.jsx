@@ -6,7 +6,7 @@ import LoadingPage from '@/Layouts/LoadingPage';
 import "@/../css/home.css";
 import "/node_modules/shepherd.js/dist/css/shepherd.css";
 import { ShepherdTour, ShepherdTourContext } from 'react-shepherd';
-import newSteps from '@/pages/steps';
+import newSteps from '@/Pages/steps';
 
 const tourOptions = {
   defaultStepOptions: {
