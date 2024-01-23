@@ -10,4 +10,9 @@ export default defineConfig({
         }),
         react(),
     ],
+    build: {
+        rollupOptions: {
+            external: ['/node_modules/shepherd.js/dist/css/shepherd.css']
+        }
+    }
 });
