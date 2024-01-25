@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+	.menu-title {
+		@apply font-semibold text-2xl text-white leading-tight my-0 py-0 font-seconder
+	}
+	
+}
+
+@layer utilities {
+	.bg-second {
+		@apply bg-orange-600
+	}
+	.bg-second-effect {
+		@apply bg-orange-500
+	}
+	.text-second {
+		@apply text-orange-600
+	}
+	.bg-second-2 {
+		@apply bg-gradient-to-r from-orange-600 via-[#fd1d1d] to-orange-600
+	}
+
+	.text-main {
+		@apply text-white
+	}
+	.bg-main {
+		@apply bg-white
+	}
+
+	.text-title {
+		@apply text-slate-300
+	}
+	.text-desc {
+		@apply text-slate-400
+	}
+	.text-sub-desc {
+		@apply text-slate-500
+	}
+	.bg-content {
+		@apply bg-slate-100
+	}
+
+	.bg-accent {
+		@apply bg-red-300
+	}
+
+	/*	alert style */
+	.text-error {
+		@apply text-red-600
+	}
+}

@@ -124,7 +124,7 @@ const Modal = function ({
         className="modal modal-bottom sm:modal-middle text-2xl"
         index={index}
       >
-        <div className="modal-box bg-teal-900">
+        <div className="modal-box bg-main">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -148,7 +148,7 @@ const Modal = function ({
               <span>{flash.message}</span>
             </div>
           )}
-          <h3 className="font-bold text-6xl mb-6 text-center text-slate-300">{heading}</h3>
+          <h3 className="font-bold text-6xl mb-6 text-center text-title">{heading}</h3>
           <form action="" method="post" onSubmit={handleSubmit}>
             <ul className="">
               <li className="pb-3">
@@ -156,7 +156,7 @@ const Modal = function ({
                   <input
                     type="text"
                     placeholder="Title"
-                    className="input input-sm input-bordered border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
+                    className="input input-sm input-bordered border-slate-400 outline-slate-400 bg-slate-100 text-sub-desc focus:border-slate-400 focus:ring-slate-400 placeholder-slate-400"
                     name="title"
                     value={title}
 					defaultValue="nilai 1"
@@ -175,7 +175,7 @@ const Modal = function ({
                 <div className="form-control w-full">
                   <select
                     id="categories"
-                    className="select select-sm py-0 select-bordered border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
+                    className="select select-sm py-0 input-bordered border-slate-400 outline-slate-400 bg-slate-100 text-sub-desc focus:border-slate-400 focus:ring-slate-400 placeholder-slate-400"
                     name="category_id"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
@@ -204,7 +204,7 @@ const Modal = function ({
               <li>
                 <div className="form-control">
                   <textarea
-                    className="textarea textarea-sm textarea-bordered w-full border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
+                    className="textarea textarea-sm textarea-bordered w-full input-bordered border-slate-400 outline-slate-400 bg-slate-100 text-sub-desc focus:border-slate-400 focus:ring-slate-400 placeholder-slate-400"
                     placeholder="Description"
                     name="description"
                     value={description}
@@ -222,11 +222,11 @@ const Modal = function ({
               <li>
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text ml-2">Start Time</span>
+                    <span className="label-text ml-2 text-desc">Start Time</span>
                   </label>
                   <input
                     type="time"
-                    className="input input-sm input-bordered w-full border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
+                    className="input input-sm input-bordered border-slate-400 outline-slate-400 bg-slate-100 text-sub-desc focus:border-slate-400 focus:ring-slate-400 placeholder-slate-400"
                     name="startTime"
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
@@ -243,11 +243,11 @@ const Modal = function ({
               <li className="pb-3">
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text ml-2">End Time</span>
+                    <span className="label-text ml-2 text-desc">End Time</span>
                   </label>
                   <input
                     type="time"
-                    className="input input-sm input-bordered w-full border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
+                    className="input input-sm input-bordered border-slate-400 outline-slate-400 bg-slate-100 text-sub-desc focus:border-slate-400 focus:ring-slate-400 placeholder-slate-400"
                     name="endTime"
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}
@@ -271,7 +271,7 @@ const Modal = function ({
                             <input
                               id="days"
                               type="checkbox"
-                              className="checkbox checkbox-sm border-slate-100 outline-slate-100 bg-slate-200 text-teal-800 focus:border-slate-500 focus:ring-slate-500"
+                              className="checkbox checkbox-sm border-slate-400 outline-slate-400 bg-slate-100 text-sub-desc focus:border-slate-400 focus:ring-slate-400 placeholder-slate-400"
                               name="days"
                               value={dayDefault.name}
                               onChange={(e) => {
@@ -301,7 +301,7 @@ const Modal = function ({
               </li>
               <div className="modal-action justify-center w-full">
                 <button
-                  className="btn btn-sm w-[450px] border-0 bg-white hover:bg-gradient-to-tr hover:from-slate-700 hover:from-10 hover:via-slate-300 hover:via-20 hover:to-white hover:to-80 hover:text-slate-500 text-slate-400 text-xl"
+                  className="btn btn-sm w-[450px] border-0 bg-second hover:bg-orange-500 text-main text-xl"
                   type="submit"
                   data-action={buttonType}
                 >

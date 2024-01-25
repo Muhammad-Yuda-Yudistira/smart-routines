@@ -76,7 +76,7 @@ const DropdownLink = ({ className = '', children, ...props }) => {
             {...props}
             id="menu-sub-profile"
             className={
-                'block w-full px-4 py-2 text-left text-sm leading-5 text-yellow-700 hover:bg-slate-100 focus:outline-none focus:bg-slate-100 transition duration-150 ease-in-out ' +
+                'block w-full px-4 py-2 text-left text-sm leading-5 text-slate-400 hover:bg-slate-100 focus:outline-none focus:bg-slate-100 transition duration-150 ease-in-out ' +
                 className
             }
         >

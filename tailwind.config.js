@@ -13,7 +13,10 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', 'Nova Square', 'Smooch Sans', 'Vina Sans',...defaultTheme.fontFamily.sans],
+                sans: ['Figtree', 'Vina Sans',...defaultTheme.fontFamily.sans],
+                main: ['Nova Square'],
+                seconder: ['Grape Nuts'],
+                tersier: ['Smooch Sans'],
             },
         },
     },

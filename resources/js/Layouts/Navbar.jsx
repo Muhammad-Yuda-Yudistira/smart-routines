@@ -1,9 +1,8 @@
 import { Link } from "@inertiajs/react";
 
 export default function Navbar({user}) {
-    console.log('user:', user)
     return (
-        <div className="navbar bg-dark text-secondary-content shadow-2xl shadow-white">
+        <div className="navbar text-second shadow-2xl shadow-orange-600 bg-main">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -58,7 +57,7 @@ export default function Navbar({user}) {
             <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1">
                     {user ? (<li>
-                                <Link href={route('dashboard')}>Dashboard</Link>
+                                <Link href={route('routines.index')}>Back</Link>
                             </li>)
                     :
                     (<>

@@ -22,7 +22,7 @@ export default function List({ routines, user, categories }) {
     <>
       <ul className="steps steps-vertical w-full text-slate-300">
         {startPoint[0] != "00:00:00" && routines.length > 0 ? (
-          <li className="step" key="0">
+          <li className="step step-neutral" data-content="!" key="0">
             <Card
               opening="00:00"
               categories={categories}
@@ -30,7 +30,7 @@ export default function List({ routines, user, categories }) {
             />
           </li>
         ) :
-        (<li className="step" key="0">
+        (<li className="step step-neutral" data-content="!" key="0">
             <Card
               opening="00:00"
               categories={categories}
@@ -68,7 +68,7 @@ export default function List({ routines, user, categories }) {
             }
             return (
               <>
-                <li className="step" key={index}>
+                <li className="step step-neutral font-tersier" data-content="★" key={index}>
                   <Card
                     routine={routine}
                     days={routine.days}
@@ -79,7 +79,7 @@ export default function List({ routines, user, categories }) {
                 </li>
                 {!startPoint.includes(routine.end_time) &&
                   routine.end_time !== "00:00:00" && (
-                    <li className="step" key={routines.length + index}>
+                    <li className="step step-neutral" data-content="!" key={routines.length + index}>
                       <Card
                         opening={routine.end_time}
                         newTime={emptyCardTime}
@@ -91,7 +91,7 @@ export default function List({ routines, user, categories }) {
               </>
             );
           })}
-        <div className="step text-red-800" style={{fontFamily:'Smooch Sans'}}>
+        <div className="step step-neutral font-tersier" data-content="●">
           <p className="text-lg text-slate-500 opacity-9">00:00</p>
         </div>
       </ul>
