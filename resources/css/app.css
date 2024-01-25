@@ -28,6 +28,7 @@
 		@apply text-white
 	}
 
+
 	.text-title {
 		@apply text-slate-300
 	}
@@ -36,6 +37,9 @@
 	}
 	.text-sub-desc {
 		@apply text-slate-500
+	}
+	.bg-content {
+		@apply bg-slate-100
 	}
 
 	.bg-accent {

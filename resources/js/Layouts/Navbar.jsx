@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/react";
 
 export default function Navbar({user}) {
     return (
-        <div className="navbar bg-dark text-secondary-content shadow-2xl shadow-white">
+        <div className="navbar text-second shadow-2xl shadow-orange-600 bg-main">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
