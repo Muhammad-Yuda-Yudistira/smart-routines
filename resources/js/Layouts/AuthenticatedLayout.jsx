@@ -14,56 +14,51 @@ export default function Authenticated({ user, header, children }) {
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
-                        <div id="navbar" className="flex">
+                        <div id="navbar" className="flex justify-between w-full">
+                            <div className="menu-container flex">
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink
+                                        className="clicker"
+                                        href={route("routines.index")}
+                                        active={route().current("routines.index")}
+                                    >
+                                        Routines
+                                    </NavLink>
+                                </div>
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink
+                                        className="clicker"
+                                        href={route("graphic.routines.index")}
+                                        active={route().current("graphic.routines.index")}
+                                    >
+                                        Graphic
+                                    </NavLink>
+                                </div>
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink
+                                        className="clicker"
+                                        href={route("resolutions.index")}
+                                        active={route().current("resolutions.index")}
+                                    >
+                                        Resolutions
+                                    </NavLink>
+                                </div>
+                                <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                    <NavLink
+                                        className="clicker"
+                                        href={route("guides.index")}
+                                        active={route().current("guides.index")}
+                                    >
+                                        Guides
+                                    </NavLink>
+                                </div>
+                                
+                            </div>
+
                             <div className="shrink-0 flex items-center">
                                 <Link href="/" className="w-[40px]">
                                     <ApplicationLogo className="block h-9 w-full fill-current text-gray-800" />
                                 </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                {/*<NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
-                                >
-                                    Dashboard
-                                </NavLink>*/}
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink
-                                    className="clicker"
-                                    href={route("routines.index")}
-                                    active={route().current("routines.index")}
-                                >
-                                    Routines
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink
-                                    className="clicker"
-                                    href={route("graphic.routines.index")}
-                                    active={route().current("graphic.routines.index")}
-                                >
-                                    Graphic
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink
-                                    className="clicker"
-                                    href={route("resolutions.index")}
-                                    active={route().current("resolutions.index")}
-                                >
-                                    Resolutions
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink
-                                    className="clicker"
-                                    href={route("guides.index")}
-                                    active={route().current("guides.index")}
-                                >
-                                    Guides
-                                </NavLink>
                             </div>
                             
                         </div>
@@ -76,7 +71,7 @@ export default function Authenticated({ user, header, children }) {
                                             <button
                                                 type="button"
                                                 id="menu-profile"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-slate-500 bg-white hover:text-red-700 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-slate-400 bg-white hover:text-slate-500 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
 
@@ -199,7 +194,7 @@ export default function Authenticated({ user, header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white shadow">
+                <header className="bg-second shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {header}
                     </div>

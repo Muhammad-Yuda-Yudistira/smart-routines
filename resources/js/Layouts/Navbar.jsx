@@ -1,7 +1,6 @@
 import { Link } from "@inertiajs/react";
 
 export default function Navbar({user}) {
-    console.log('user:', user)
     return (
         <div className="navbar bg-dark text-secondary-content shadow-2xl shadow-white">
             <div className="navbar-start">
@@ -58,7 +57,7 @@ export default function Navbar({user}) {
             <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1">
                     {user ? (<li>
-                                <Link href={route('dashboard')}>Dashboard</Link>
+                                <Link href={route('routines.index')}>Back</Link>
                             </li>)
                     :
                     (<>

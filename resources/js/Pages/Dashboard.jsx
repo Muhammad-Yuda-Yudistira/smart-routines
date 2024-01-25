@@ -6,7 +6,7 @@ export default function Dashboard({ auth, routines }) {
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 className="menu-title">
                     Dashboard
                 </h2>
             }
