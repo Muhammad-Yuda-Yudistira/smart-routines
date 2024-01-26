@@ -34,7 +34,7 @@ export default function Routines({ auth, title, categories, routines = null }) {
           
           <div className="container-fluid text-center p-10 px-28 box-border selection:bg-white selection:text-gray-700">
             {flash.message && (
-              <div className="alert alert-success h-12 flex mb-3">
+              <div className="alert alert-success bg-second text-main h-12 flex mb-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="stroke-current shrink-0 h-6 w-6"

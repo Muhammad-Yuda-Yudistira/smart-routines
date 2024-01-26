@@ -132,7 +132,7 @@ const Modal = function ({
             </button>
           </form>
           {flash.message && (
-            <div className="alert alert-success h-9 py-1 my-3">
+            <div className="alert alert-success bg-second text-main h-9 py-1 my-3">
               <svg
                 className="stroke-current shrink-0 h-6 w-6"
                 fill="none"
@@ -164,7 +164,7 @@ const Modal = function ({
                   />
                   <label className="label">
                     {errors.title && (
-                      <span className="label-text-alt text-red-600">
+                      <span className="label-text-alt text-second">
                         {errors.title}
                       </span>
                     )}
@@ -194,7 +194,7 @@ const Modal = function ({
                   </select>
                   <label className="label">
                     {errors.category_id && (
-                      <span className="label-text-alt text-red-600">
+                      <span className="label-text-alt text-second">
                         {errors.category}
                       </span>
                     )}
@@ -212,7 +212,7 @@ const Modal = function ({
                   ></textarea>
                   <label className="label">
                     {errors.description && (
-                      <span className="label-text-alt text-red-600">
+                      <span className="label-text-alt text-second">
                         {errors.description}
                       </span>
                     )}
@@ -233,7 +233,7 @@ const Modal = function ({
                   />
                   <label className="label">
                     {errors.start_time && (
-                      <span className="label-text-alt text-red-600">
+                      <span className="label-text-alt text-second">
                         {errors.start_time}
                       </span>
                     )}
@@ -254,7 +254,7 @@ const Modal = function ({
                   />
                   <label className="label">
                     {errors.end_time && (
-                      <span className="label-text-alt text-red-600">
+                      <span className="label-text-alt text-second">
                         {errors.end_time}
                       </span>
                     )}
@@ -295,7 +295,7 @@ const Modal = function ({
                 </ul>
                 {errors.days && (
                   <div className="text-start">
-                    <small className="text-red-600">{errors.days}</small>
+                    <small className="text-second">{errors.days}</small>
                   </div>
                 )}
               </li>

@@ -86,7 +86,7 @@ export default function Card({
           >
             Add
           </button>
-          <p className="text-sm text-center text-slate-700 pt-1">{newTime}</p>
+          <p className="text-sm text-center text-main pt-1 relative z-20">{newTime}</p>
           <div id="bg-glassmorphism" className="absolute w-full h-full top-0 left-0 bg-clip bg-second blur-sm"></div>
         </div>
       </div>

@@ -104,7 +104,7 @@ export default function Homepage()
                     </span>
                   </div>
                   <div className="py-10">
-                    <Link href={route('guides.index')} id="step-2" className="clicker text-4xl inline-block">📘</Link>
+                    <Link href="/guides" id="step-2" className="clicker text-4xl inline-block">📘</Link>
                     <div className="uppercase text-base text-second font-semibold">Guide</div>
                   </div>
                 </section>

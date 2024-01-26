@@ -50,6 +50,6 @@
 
 	/*	alert style */
 	.text-error {
-		@apply text-red-600
+		@apply text-[#fd1d1d]
 	}
 }
