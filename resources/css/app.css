@@ -11,6 +11,7 @@
 }
 
 @layer utilities {
+	/*	#ea580c */
 	.bg-second {
 		@apply bg-orange-600
 	}
@@ -31,6 +32,7 @@
 		@apply bg-white
 	}
 
+	/* slate-500: #64748b	*/
 	.text-title {
 		@apply text-slate-300
 	}

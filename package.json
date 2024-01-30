@@ -22,6 +22,8 @@
     },
     "dependencies": {
         "gsap": "^3.12.3",
-        "react-shepherd": "^4.2.0"
+        "jodit-react": "^4.0.9",
+        "react-shepherd": "^4.2.0",
+        "sweetalert2": "^11.10.4"
     }
 }

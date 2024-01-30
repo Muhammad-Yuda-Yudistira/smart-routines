@@ -1,6 +1,7 @@
 import { Link, router } from "@inertiajs/react";
 import Modal from "@/Components/Routines/Modal";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Card({
   routine = null,
@@ -50,9 +51,21 @@ export default function Card({
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                if (confirm("Are you sure?")) {
-                  router.delete(route("routines.destroy", { id: routine.id }));
-                }
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "Delete this...",
+                  confirmButtonText: "Yes, delete it!",
+                  showCancelButton: true,
+                  confirmButtonColor: "#ea580c",
+                  cancelButtonColor: "#64748b",
+                }).then(result => {
+                    if(result.isConfirmed) {
+                      router.delete(route("routines.destroy", {id: routine.id}));
+                    }
+                })
+                // if (confirm("Are you sure?")) {
+                //   router.delete(route("routines.destroy", { id: routine.id }));
+                // }
               }}
               className="badge bg-second text-main border-0"
             >

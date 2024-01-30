@@ -1,5 +1,5 @@
 import { router, usePage } from "@inertiajs/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Modal = function ({
   categories,
@@ -31,11 +31,14 @@ const Modal = function ({
   const [oldEndTime, setOldEndTime] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
   const [buttonType, setButtonType] = useState("create");
+
   
 		  
   
   function handleSubmit(e) {
     e.preventDefault();
+    console.log("title:", title)
+    console.log("desc:", description)
     const newRoutine = {
       title,
 	    description,
@@ -203,13 +206,7 @@ const Modal = function ({
               </li>
               <li>
                 <div className="form-control">
-                  <textarea
-                    className="textarea textarea-sm textarea-bordered w-full input-bordered border-slate-400 outline-slate-400 bg-slate-100 text-sub-desc focus:border-slate-400 focus:ring-slate-400 placeholder-slate-400"
-                    placeholder="Description"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  ></textarea>
+                  
                   <label className="label">
                     {errors.description && (
                       <span className="label-text-alt text-second">

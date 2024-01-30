@@ -1,8 +1,9 @@
 import {Head,router,usePage} from '@inertiajs/react';
-import {useState,useEffect} from 'react';
+import {useState,useEffect,useRef} from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ContainerAdmin from '@/Layouts/ContainerAdmin';
 import Title from '@/Components/Title';
+
 
 export default function Form({title,categories,resolution=null,auth})
 {
@@ -18,7 +19,9 @@ export default function Form({title,categories,resolution=null,auth})
 
 	let year = new Date().getFullYear()
 
-	useEffect(() => {
+	console.log("new desc:", description)
+
+	useEffect((newDesc) => {
 		if(resolution)
 		{
 			setTitleRes(resolution.title)
@@ -32,6 +35,14 @@ export default function Form({title,categories,resolution=null,auth})
 			return
 		}
 	}, [])
+
+	function richTextEditorHandle(newDesc)
+	{
+		if(newDesc)
+		{
+			return setDescription(newDesc)
+		}
+	}
 
 
 	function handleChange(e)
@@ -81,13 +92,14 @@ export default function Form({title,categories,resolution=null,auth})
 		  formData.append('description', description);
 		  formData.append('image', image);
 
+		  console.log('title:', titleRes)
+		  console.log('description:', description)
+
 		if(resolution)
 		{
-			console.log('formData:',formData);
 			router.put(route('resolutions.update', {id:resolution.id}), formData)
 		} else
 		{
-			console.log('formData2:',formData);
 			router.post(route('resolutions.store'), formData)
 		}
 
@@ -107,7 +119,7 @@ export default function Form({title,categories,resolution=null,auth})
 				<AuthenticatedLayout 
 					user={auth.user}
 					header={
-						<h2 className="menu-title" style={{fontFamily:'Smooch Sans'}}>
+						<h2 className="menu-title font-tersier">
 			              <span className="inline-block pr-2">
                             <svg width="16px" height="16px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                                 
@@ -218,6 +230,9 @@ export default function Form({title,categories,resolution=null,auth})
 													</td>
 													<td className="w-full flex flex-col justify-start">
 														<textarea id="goal" name="goal" onChange={handleChange} value={goal} className="textarea textarea-sm textarea-bordered textarea-info w-full bg-slate-300 border-slate-400 placeholder-slate-400 text-sub-desc" placeholder="Example: Work in google"></textarea>
+														<input id="goal" type="hidden" name="goal" />
+														
+
 														{errors.goal && <small className="text-second">{errors.goal}</small>}
 														<div className="label p-0">
 														    <span className="label-text text-desc tracking-wide">*1 resolution for 1 goals. if you have 3 goals please create 3 resolution with the same title. recommendation: max 3 goals, min 1 goals.</span>
@@ -233,7 +248,7 @@ export default function Form({title,categories,resolution=null,auth})
 														<label for="description"className="mr-3 font-semibold capitalize">description:</label>
 													</td>
 													<td className="w-full flex flex-col justify-start">
-														<textarea id="description" name="description" onChange={handleChange} value={description} className="textarea textarea-sm textarea-info textarea-bordered w-full bg-slate-300 border-slate-400 placeholder-slate-400 text-sub-desc" placeholder="Example: 1.To be CTO in google company. 2.Create my project until success return money the 7 million rupiah per mounth, to apply for a job at google."></textarea>
+														
 														{errors.description && <small className="text-second">{errors.description}</small>}
 														<div className="label p-0">
 															<span className="label-text text-desc tracking-wide">*this is detail for your goal, describe here. don't too long; short, dense and clear. create to point: 1.detail your goal 2.how to way finished your goal.</span>

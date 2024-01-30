@@ -6,7 +6,7 @@ import LoadingPage from '@/Layouts/LoadingPage';
 import "@/../css/home.css";
 import "/node_modules/shepherd.js/dist/css/shepherd.css";
 import { ShepherdTour, ShepherdTourContext } from 'react-shepherd';
-// import newSteps from '@/Pages/steps';
+import newSteps from '@/Pages/steps';
 
 const tourOptions = {
   defaultStepOptions: {
@@ -75,17 +75,17 @@ export default function Homepage()
                 <audio id="backsound" className="" ref={audioRef} controls volume="0.5" src="assets/images/theme/audio/a-long-way.mp3"></audio>
                 <h2 className="text-gray-400"><span id="audio-icon" className="text-sm">🎹</span> {playlist[currentAudioIndex].title}</h2>
               </div>
-              <div id="hero-homepage" className="container text-center w-full m-10">
+              <div id="hero-homepage" className="container text-center w-full m-10 mb-0">
                 <section id="section-1">
-                  {/*<ShepherdTour steps={newSteps} tourOptions={tourOptions}>
+                  <ShepherdTour steps={newSteps} tourOptions={tourOptions}>
                     <Button />
-                  </ShepherdTour>*/}
+                  </ShepherdTour>
 
-                  <div className="title-box mb-16">
+                  <div className="title-box mb-8">
                     <h1 id="title" className="text-5xl text-gray-300">Smart Routines</h1>
                     <small id="title-tag" className="text-sm text-gray-400 tracking-widest"></small>
                   </div>
-                  <div id="description" className="flex flex-col justify-between gap-24">
+                  <div id="description" className="flex flex-col justify-between gap-16">
                     <span className="paragraf-1 text-gray-400 font-serif tracking-wide box-border h-20">
                       <span id="text-box" className="block h-6">
                         <p className="viewer inline hover:text-xl transition-all duration-150">You are Main Character in Your life. Create your mission and done of this game.</p><br/>

@@ -1,12 +1,11 @@
-import {Head,Link,usePage} from '@inertiajs/react';
+import {Head,Link,usePage,router} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ContainerAdmin from '@/Layouts/ContainerAdmin';
 import Title from '@/Components/Title';
+import Swal from 'sweetalert2';
 
 export default function Index({auth,title,data,routines}) {
   const {flash} = usePage().props;
-  console.log("data:", data)
-  console.log("routines:", routines)
 	return (
 		<>
 			<AuthenticatedLayout
@@ -85,7 +84,20 @@ export default function Index({auth,title,data,routines}) {
                                                 </span>
                                                 edit
                                             </Link>
-                                            <Link href={route('resolutions.destroy', {id:resolution.id})} method="delete" onClick={function() { return confirm('Are you sure?')}} as="button" type="button" className="btn btn-sm uppercase mr-4 rounded-tr-none text-sm bg-second-2 border-none text-main hover:bg-orange-500">
+                                            <Link onClick={function(e) { 
+                                                e.preventDefault()
+                                                Swal.fire({
+                                                    title: "Are you sure?",
+                                                    text: "Delete this...",
+                                                    confirmButtonText: "Yes, delete it!",
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: "#ea580c",
+                                                    cancelButtonColor: "#64748b",
+                                                }).then(result => {
+                                                    if(result.isConfirmed) {
+                                                        router.delete(route('resolutions.destroy', {id:resolution.id}))
+                                                    } 
+                                                })}} as="button" type="button" className="btn btn-sm uppercase mr-4 rounded-tr-none text-sm bg-second-2 border-none text-main hover:bg-orange-500">
                                                 <span className="text-xl">
                                                     <svg fill="white" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M960.36.011 109 508.785v902.442L960.36 1920l851.475-508.773V508.785z" fill-rule="evenodd"/>
