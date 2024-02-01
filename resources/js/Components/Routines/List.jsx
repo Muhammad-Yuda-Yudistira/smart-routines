@@ -16,6 +16,7 @@ export default function List({ routines, user, categories }) {
 
     startedPoint = convertTimeToMinute(startPoint[0]);
     startedPoint = convertToHuman(startedPoint);
+
   }
 
   return (
@@ -30,13 +31,8 @@ export default function List({ routines, user, categories }) {
             />
           </li>
         ) :
-        (<li className="step step-neutral" data-content="!" key="0">
-            <Card
-              opening="00:00"
-              categories={categories}
-              newTime="24 Hour"
-            />
-          </li>)}
+        false
+        }
         {routines.length > 0 &&
           routines.map((routine, index) => {
             index = index + 1;
@@ -94,6 +90,12 @@ export default function List({ routines, user, categories }) {
         <div className="step step-neutral font-tersier" data-content="●">
           <p className="text-lg text-slate-500 opacity-9">00:00</p>
         </div>
+        {!routines && <li className="step step-neutral" data-content="!" key="0">
+          <Card
+            newTime="24 hours 0 minute"
+            categories={categories}
+          />
+        </li>}
       </ul>
     </>
   );
@@ -108,8 +110,6 @@ function convertTimeToMinute(time, position) {
   return inMinutes;
 }
 function minuteDifference(minuteStart, minuteEnd) {
-  console.log("start:",minuteStart)
-  console.log("end:",minuteEnd)
   if(minuteEnd < minuteStart)
   {
     // 24 - A = 1 jam + B = 4 jam

@@ -3,6 +3,7 @@ import {useState,useEffect,useRef} from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ContainerAdmin from '@/Layouts/ContainerAdmin';
 import Title from '@/Components/Title';
+import JoditEditor from 'jodit-react';
 
 
 export default function Form({title,categories,resolution=null,auth})
@@ -19,7 +20,10 @@ export default function Form({title,categories,resolution=null,auth})
 
 	let year = new Date().getFullYear()
 
-	console.log("new desc:", description)
+	const editor = useRef(null)
+	const config = {
+		placeholder: "Description",
+	}
 
 	useEffect((newDesc) => {
 		if(resolution)
@@ -83,24 +87,22 @@ export default function Form({title,categories,resolution=null,auth})
 
 		categoryId = Number(categoryId)
 
-		const formData = new FormData();
-		  formData.append('title', titleRes);
-		  formData.append('type', type);
-		  formData.append('period', period);
-		  formData.append('category_id', categoryId);
-		  formData.append('goal', goal);
-		  formData.append('description', description);
-		  formData.append('image', image);
-
-		  console.log('title:', titleRes)
-		  console.log('description:', description)
+		const newResolution = {
+			title: titleRes,
+			type,
+			period,
+			category_id: categoryId,
+			goal,
+			description,
+		}
 
 		if(resolution)
 		{
-			router.put(route('resolutions.update', {id:resolution.id}), formData)
+			router.put(route('resolutions.update', {id:resolution.id}), newResolution)
 		} else
 		{
-			router.post(route('resolutions.store'), formData)
+			newResolution['image'] = image
+			router.post(route('resolutions.store'), newResolution)
 		}
 
 		if(flash.message)
@@ -248,7 +250,12 @@ export default function Form({title,categories,resolution=null,auth})
 														<label for="description"className="mr-3 font-semibold capitalize">description:</label>
 													</td>
 													<td className="w-full flex flex-col justify-start">
-														
+														<JoditEditor 
+															ref={editor}
+															config={config}
+															value={description}
+															onBlur={newDesc => {setDescription(newDesc)}}
+														/>
 														{errors.description && <small className="text-second">{errors.description}</small>}
 														<div className="label p-0">
 															<span className="label-text text-desc tracking-wide">*this is detail for your goal, describe here. don't too long; short, dense and clear. create to point: 1.detail your goal 2.how to way finished your goal.</span>
@@ -267,7 +274,7 @@ export default function Form({title,categories,resolution=null,auth})
 															<img src={"/storage/" + resolution.image} alt="" width="150" height="150" className=""/>
 														</span>}
 														
-														<input id="image" type="file" name="image" onChange={handleChange} className="file-input file-input-sm file-input-bordered file-input-info w-full max-w-xs bg-slate-300 border-slate-400 placeholder-slate-400 text-sub-desc" />
+														<input id="image" type="file" name="image" onChange={handleChange} className="file-input file-input-sm file-input-bordered file-input-info w-full max-w-xs bg-slate-300 border-slate-400 placeholder-slate-400 text-sub-desc" disabled />
 														<small className="block">{image.name}</small>
 														{errors.image && <small className="text-second">{errors.image}</small>}
 														<div className="label p-0">
@@ -278,7 +285,7 @@ export default function Form({title,categories,resolution=null,auth})
 											</tr>
 											<tr>
 												<td className="w-full font-main">
-													<button name="create" className="capitalize btn btn-sm btn-info w-full text-md text-main bg-second border-orange-600 hover:bg-orange-500 hover:border-orange-600">
+													<button name="create" type="submit" className="capitalize btn btn-sm btn-info w-full text-md text-main bg-second border-orange-600 hover:bg-orange-500 hover:border-orange-600">
 														create
 														<svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 															<rect width="24" height="24" fill=""/>

@@ -1,5 +1,6 @@
 import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState, useRef } from "react";
+import JoditEditor from "jodit-react";
 
 const Modal = function ({
   categories,
@@ -32,13 +33,17 @@ const Modal = function ({
   const [isSubmit, setIsSubmit] = useState(false);
   const [buttonType, setButtonType] = useState("create");
 
+  const editor = useRef(null);
+  const config = {
+    placeholder: "Write here all..",
+    sanitize: true,
+  }
+
   
 		  
   
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("title:", title)
-    console.log("desc:", description)
     const newRoutine = {
       title,
 	    description,
@@ -206,7 +211,12 @@ const Modal = function ({
               </li>
               <li>
                 <div className="form-control">
-                  
+                  <JoditEditor 
+                    ref={editor}
+                    config={config}
+                    value={description}
+                    onBlur={newDesc => {setDescription(newDesc)}}
+                  />
                   <label className="label">
                     {errors.description && (
                       <span className="label-text-alt text-second">

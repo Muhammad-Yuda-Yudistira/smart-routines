@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ContainerAdmin from '@/Layouts/ContainerAdmin';
 import Title from '@/Components/Title';
 import Swal from 'sweetalert2';
+import parse from 'html-react-parser';
 
 export default function Index({auth,title,data,routines}) {
   const {flash} = usePage().props;
@@ -76,9 +77,9 @@ export default function Index({auth,title,data,routines}) {
                                     </div>
                                     <div id="content-right">
                                         <div className="mb-2">
-                                            <Link href={route('resolutions.edit', {id:resolution.id})} method="get" as="button" type="button" className="btn btn-sm btn-outline uppercase mr-4 rounded-tr-none text-sm btn-disabled">
+                                            <Link href={route('resolutions.edit', {id:resolution.id})} method="get" as="button" type="button" className="btn btn-sm btn-outline uppercase mr-4 rounded-tr-none text-sm">
                                                 <span className="text-xl">
-                                                    <svg fill="white" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg fill="black" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M960.36.011 109 508.785v902.442L960.36 1920l851.475-508.773V508.785L960.36.01ZM222.516 1346.864v-773.83L960.36 132.143l737.96 440.89v773.831l-737.96 441.005-737.846-441.005Z" fill-rule="evenodd"/>
                                                     </svg>
                                                 </span>
@@ -115,8 +116,8 @@ export default function Index({auth,title,data,routines}) {
                                         <li>
                                             <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">category: </span>{resolution.category.name}</p>
                                         </li>
-                                        <li>
-                                            <p className="text-desc"><div className="text-xl text-desc font-semibold capitalize">description: </div>{resolution.description}</p>
+                                        <li className="bg-slate-100 p-5 rounded">
+                                            <p className="text-desc"><div className="text-xl text-desc font-semibold capitalize">description: </div>{parse(resolution.description)}</p>
                                         </li>
                                         <li>
                                           <div className="text-3xl font-semibold capitalize text-desc">routines for this goal: </div>
