@@ -34,7 +34,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// user access
+// user access main contents
 Route::middleware('auth')->group(function() {
     Route::resource('/dashboard/routines', RoutineController::class);
     Route::resource('/dashboard/resolutions', ResolutionController::class);

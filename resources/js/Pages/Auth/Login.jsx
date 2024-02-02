@@ -23,7 +23,8 @@ export default function Login({ status, canResetPassword }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('login'));
+        // post(route('login'));
+        post('/login')
     };
 
     return (
@@ -80,7 +81,7 @@ export default function Login({ status, canResetPassword }) {
                 <div className="flex items-center justify-end mt-4">
                     {canResetPassword && (
                         <Link
-                            href={route('password.request')}
+                            href="/forgot-password"
                             className="underline text-sm text-sub-desc hover:text-desc rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300"
                         >
                             Forgot your password?

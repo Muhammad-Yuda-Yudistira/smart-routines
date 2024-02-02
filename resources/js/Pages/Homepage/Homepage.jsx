@@ -31,10 +31,10 @@ export default function Homepage()
   const audioRef = useRef();
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0)
   const playlist = [
-      {title: 'Leonell Cassio - The paranormal is real (ft-carrie)', source: 'assets/images/theme/audio/leonell-cassio-the-paranormal-is-real-ft-carrie.mp3'},
-      {title: 'Science Documentary', source: 'assets/images/theme/audio/science-documentary.mp3'},
-      {title: 'Sakura Girl - Peach', source: 'assets/images/theme/audio/Sakura-Girl-Peach.mp3'},
-      {title: 'A long way', source: 'assets/images/theme/audio/a-long-way.mp3'},
+      {title: 'Leonell Cassio - The paranormal is real (ft-carrie)', source: '/assets/images/theme/audio/leonell-cassio-the-paranormal-is-real-ft-carrie.mp3'},
+      {title: 'Science Documentary', source: '/assets/images/theme/audio/science-documentary.mp3'},
+      {title: 'Sakura Girl - Peach', source: '/assets/images/theme/audio/Sakura-Girl-Peach.mp3'},
+      {title: 'A long way', source: '/assets/images/theme/audio/a-long-way.mp3'},
     ]
 
   gsap.registerPlugin(TextPlugin);
@@ -72,7 +72,7 @@ export default function Homepage()
             <LoadingPage>
 
               <div id="audio-box" className="absolute flex flex-col justify-center z-0">
-                <audio id="backsound" className="" ref={audioRef} controls volume="0.5" src="assets/images/theme/audio/a-long-way.mp3"></audio>
+                <audio id="backsound" className="" ref={audioRef} controls volume="0.5" src="/public/assets/images/theme/audio/a-long-way.mp3"></audio>
                 <h2 className="text-gray-400"><span id="audio-icon" className="text-sm">🎹</span> {playlist[currentAudioIndex].title}</h2>
               </div>
               <div id="hero-homepage" className="container text-center w-full m-10 mb-0">
