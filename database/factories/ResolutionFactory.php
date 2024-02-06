@@ -20,21 +20,24 @@ class ResolutionFactory extends Factory
     {
         $type = ['Obligation', 'Lifestyle'];
         $period = ['Weekly', 'Monthly', 'Yearly'];
+        // $userId = mt_rand(1,3);
+        // echo "user id: $userId\n";
         return [
             'title' => fake()->sentence(),
             'type' => $type[mt_rand(1,2) - 1],
             'period' => $period[mt_rand(1,3) - 1],
-            'category_id' => mt_rand(1,11),
+            'category_id' => mt_rand(1,10),
             'goal' => fake()->sentence(mt_rand(10,20)),
             'description' => fake()->paragraph(mt_rand(3,10)),
-            'image' => 'htpps:\\source.unsplash.com/300x300'
+            'image' => 'https://source.unsplash.com/300x300',
+            // 'user_id' => $userId,
         ];
     }
     public function configure()
     {
         return $this->afterCreating(function (Resolution $resolution) {
             // Logika setelah menciptakan Resolusi, termasuk menambahkan user_id
-            $user = User::inRandomOrder()->first();
+            $user = User::whereIn('id', [1,2,3])->inRandomOrder()->first();
             $resolution->user_id = $user->id;
             $resolution->save();
         });

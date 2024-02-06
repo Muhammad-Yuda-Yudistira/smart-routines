@@ -56,7 +56,13 @@ export default function Index({auth,title,data,routines}) {
                 <main className="font-tersier">
                 {data <= 0 && (<h3 className="text-4xl my-28 text-center opacity-80">Resolution Empty</h3>)}
                 {data.map(resolution => {
-                    let newUrlImg = "/storage/" + resolution.image;
+                    let newUrlImg;
+                    if(resolution.image == "https://source.unsplash.com/300x300")
+                    {
+                        newUrlImg = resolution.image;
+                    } else {
+                        newUrlImg = "/storage/" + resolution.image;
+                    }
                     return(
                             <ul className="mb-12">
                                 <div className="mb-7">
@@ -69,9 +75,9 @@ export default function Index({auth,title,data,routines}) {
                                 </div>
                                 <div id="content-box" className="flex gap-10">
                                     <div id="content-left">
-                                        <li className="w-300 h-300 block">
+                                        <li className="w-400 h-400 block">
                                             <div className="w-full h-full overflow-hidden">
-                                                <img src={newUrlImg} alt="Image for motivation goals" className="overflow-hidden" width="300" height="300"/>
+                                                <img src={newUrlImg} alt="Image for motivation goals" className="overflow-hidden" width="400" height="400"/>
                                             </div>
                                         </li>
                                     </div>
