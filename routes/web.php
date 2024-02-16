@@ -23,7 +23,10 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Homepage/Homepage');
+    $appName = env('APP_NAME', 'Unlimited!');
+    return Inertia::render('Homepage/Homepage', [
+    'appName' => $appName,
+    ]);
 })->middleware('guest')->name('homepage');
 
 Route::get('/routines', function () {

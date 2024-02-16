@@ -21,9 +21,11 @@
         "vite": "^4.5.2"
     },
     "dependencies": {
+        "@vercel/postgres": "^0.7.2",
         "gsap": "^3.12.5",
         "html-react-parser": "^5.1.1",
         "jodit-react": "^4.0.9",
+        "pg": "^8.11.3",
         "react-shepherd": "^4.3.0",
         "sweetalert2": "^11.10.4"
     }

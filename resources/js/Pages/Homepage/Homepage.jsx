@@ -26,7 +26,7 @@ function Button() {
   }
 }
 
-export default function Homepage()
+export default function Homepage({appName})
 {
   const audioRef = useRef();
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0)
@@ -82,7 +82,7 @@ export default function Homepage()
                   </ShepherdTour>
 
                   <div className="title-box mb-8">
-                    <h1 id="title" className="text-5xl text-gray-300">Smart Routines</h1>
+                    <h1 id="title" className="text-5xl text-gray-300 uppercase">{appName}</h1>
                     <small id="title-tag" className="text-sm text-gray-400 tracking-widest"></small>
                   </div>
                   <div id="description" className="flex flex-col justify-between gap-16">

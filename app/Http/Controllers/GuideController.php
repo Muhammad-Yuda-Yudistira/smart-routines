@@ -9,6 +9,9 @@ class GuideController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Guides/Index');
+        $appName = env('APP_NAME', 'Unlimited!');
+        return Inertia::render('Guides/Index', [
+            'appName' => $appName,
+        ]);
     }
 }

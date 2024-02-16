@@ -17,6 +17,8 @@ export default {
                 main: ['Nova Square'],
                 seconder: ['Grape Nuts'],
                 tersier: ['Smooch Sans'],
+                four: ['Sixtyfour'],
+                five: ['Protest Revolution']
             },
         },
     },
