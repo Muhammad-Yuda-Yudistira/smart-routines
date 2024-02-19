@@ -1,14 +1,14 @@
 export default function Item({isActive = false, routine = null, card, index})
 {
-	card && return(<span className="bg-slate-300 opacity-60 text-stone-500 text-3xl inline-block relative w-32 h-32 text-center leading-[8rem] mb-2 pt-2 uppercase hover:opacity-30 first:mt-6 first:leading-0">
+	return (<span className="bg-slate-300 opacity-60 text-stone-500 text-3xl inline-block relative w-32 h-32 text-center leading-[8rem] mb-2 pt-2 uppercase hover:opacity-30 first:mt-6 first:leading-0">
 		{/*<p className="bg-white rotate-45 opacity-60">{routine.category.name}</p>*/}
 		<small className="bg-orange-300 absolute leading-3 p-2">{card}</small>
-		<img src="" alt="" className="m-auto w-24 h-24" />
+		<img src={'/assets/icons/simbol/hobby.svg'} alt="" className="m-auto w-24 h-24" />
 		<small className="bg-slate-700 absolute leading-3 p-2 -left-8 rounded-tr-2xl">1 Hour</small>
 	</span>)
 
-
-
+	
+	
 	// routine && index == 0 ? isActive = true : isActive;
 	// return isActive && routine ? 
 	// (

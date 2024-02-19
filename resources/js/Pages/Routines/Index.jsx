@@ -82,7 +82,6 @@ export default function Index({ auth, title, categories, routines = null }) {
   }, [startZones])
 
 
-
   return (
     <>
         <AuthenticatedLayout
@@ -151,7 +150,7 @@ export default function Index({ auth, title, categories, routines = null }) {
                   }*/}
                   {
                     cards.map((card, index) => {
-                      <Item card={card} index={index} />
+                      return <Item card={card} index={index} />
                     }) 
                   }
                   </ul>
