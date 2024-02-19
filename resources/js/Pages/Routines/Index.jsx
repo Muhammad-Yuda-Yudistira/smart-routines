@@ -12,16 +12,76 @@ import "@/../css/routine.css";
 
 
 export default function Index({ auth, title, categories, routines = null }) {
+  // time zones
   const [currentTime, setCurrentTime] = useState(new Date());
+
+  // flash message
   const { flash } = usePage().props;
 
+  // card system
+  const [startZones, setStartZones] = useState([])
+  const [endZones, setEndZones] = useState([])
+  const [cards, setCards] = useState([])
+
+
+  const handleTimeZones = (timeZones) => {
+    let currentStartZones = []
+    let currentEndZones = []
+    timeZones.map(timeZone => {
+      currentStartZones = [...currentStartZones, timeZone.start_time]
+      currentEndZones = [...currentEndZones, timeZone.end_time]
+    })
+    setStartZones(currentStartZones)
+    setEndZones(currentEndZones)
+  }
+
+  const handleCards = (startZones, endZones) => {
+    let currentCards = []
+    if(startZones[0] != '00:00:00')
+    {
+      currentCards = [...currentCards, '00:00:00']
+    }
+    startZones.map((startZone, index) => {
+      let nextIndex = index + 1
+
+      currentCards = [...currentCards, startZone]
+      if(endZones[index] != startZones[nextIndex])
+      {
+        currentCards = [...currentCards, endZones[index]]
+      }
+    })
+    setCards(currentCards)
+  }
+
   useEffect(() => {
+    // algoritma waktu saat ini
     const interval = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
 
     return clearInterval(interval);
-  }, []);
+  }, [routines]);
+
+
+  useEffect(() => {
+    // kumpulkan data start time dan end time terlebih dahulu
+    // lalu looping lagi untuk membuat card kosong dan card berisi dengan kondisi tertentu
+    // cocokan cards dan data start time routines untuk menentuka card empty / filled
+
+    // ALGORITMA CARD MAKER
+    // CREATE ZONES
+    handleTimeZones(routines)
+  }, [routines])
+
+  useEffect(() => {
+    // CREATE CARD
+    // card pertama jika kosong
+    
+    // card berikutnya jika ada plus jika ada card kosong dibawahnya
+    handleCards(startZones, endZones)
+  }, [startZones])
+
+
 
   return (
     <>
@@ -69,7 +129,7 @@ export default function Index({ auth, title, categories, routines = null }) {
 
                 <aside id="routines-list" className="col-span-2 bg-sky-300 overflow-y-scroll h-96 bg-[url('/assets/images/theme/blob-scene-haikei.svg')] bg-cover">
                   <ul>
-                  {
+                  {/*{
                     routines[0].start_time != '00:00:00' && (<Item index={(routines.length - 1) +1} />)
                   }
                   {
@@ -88,6 +148,11 @@ export default function Index({ auth, title, categories, routines = null }) {
                         <Item routine={routine} index={index} />
                       )
                     })
+                  }*/}
+                  {
+                    cards.map((card, index) => {
+                      <Item card={card} index={index} />
+                    }) 
                   }
                   </ul>
                 </aside>
