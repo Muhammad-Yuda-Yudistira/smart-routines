@@ -22,6 +22,8 @@ export default function Index({ auth, title, categories, routines = null }) {
   const [startZones, setStartZones] = useState([])
   const [endZones, setEndZones] = useState([])
   const [cards, setCards] = useState([])
+  const [detail, setDetail] = useState('')
+  const [routineBundle, setRoutineBundle] = useState(null)
 
 
   const handleTimeZones = (timeZones) => {
@@ -53,6 +55,14 @@ export default function Index({ auth, title, categories, routines = null }) {
     setCards(currentCards)
   }
 
+  // button list
+  const handleDetail = (index) => {
+    setDetail(cards[index])
+  }
+
+
+
+
   useEffect(() => {
     // algoritma waktu saat ini
     const interval = setInterval(() => {
@@ -64,10 +74,6 @@ export default function Index({ auth, title, categories, routines = null }) {
 
 
   useEffect(() => {
-    // kumpulkan data start time dan end time terlebih dahulu
-    // lalu looping lagi untuk membuat card kosong dan card berisi dengan kondisi tertentu
-    // cocokan cards dan data start time routines untuk menentuka card empty / filled
-
     // ALGORITMA CARD MAKER
     // CREATE ZONES
     handleTimeZones(routines)
@@ -81,6 +87,21 @@ export default function Index({ auth, title, categories, routines = null }) {
     handleCards(startZones, endZones)
   }, [startZones])
 
+  // mencocokan card dengan start routine, lalu mengisinya pada detail 
+  useEffect(() => {
+    cards.map((card, index) => {
+      if(card == startZones[0]) {
+        handleDetail(index)
+      }
+
+      routines.map(routine => {
+        if(routine.start_time == detail) {
+          setRoutineBundle(routine)
+        }
+      })
+
+    })
+  }, [detail, cards, startZones])
 
   return (
     <>
@@ -128,36 +149,16 @@ export default function Index({ auth, title, categories, routines = null }) {
 
                 <aside id="routines-list" className="col-span-2 bg-sky-300 overflow-y-scroll h-96 bg-[url('/assets/images/theme/blob-scene-haikei.svg')] bg-cover">
                   <ul>
-                  {/*{
-                    routines[0].start_time != '00:00:00' && (<Item index={(routines.length - 1) +1} />)
-                  }
-                  {
-                    routines.map((routine, index) => {
-                      // console.log(routines[index + 1].start_time)
-                      var newIndex = index + 1
-                      return newIndex < routines.length && routine.end_time != routines[newIndex] ?
-                      (
-                        <>
-                          <Item routine={routine} index={index} />
-                          <Item index={(routines.length - 1) +1} />
-                        </>
-                      )
-                      :
-                      (
-                        <Item routine={routine} index={index} />
-                      )
-                    })
-                  }*/}
                   {
                     cards.map((card, index) => {
-                      return <Item card={card} index={index} />
+                      return <Item card={card} key={index} index={index} isActive={index == 0 ? true : false} startZones={startZones} handleDetail={handleDetail} />
                     }) 
                   }
                   </ul>
                 </aside>
 
                 <div id="routines-detail" className="col-span-7 bg-yellow-400 bg-[url('/assets/images/theme/stacked-steps-haikei.svg')] bg-cover bg-no-repeat">
-                  <Detail />
+                  <Detail routineBundle={routineBundle} />
                 </div>
 
               </div>

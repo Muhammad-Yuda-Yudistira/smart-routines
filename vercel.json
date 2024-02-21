@@ -10,14 +10,14 @@
             "dest": "/build/$1"
         },
         {
-        "src": "/(.*)",
-        "dest": "/api/index.php"
+            "src": "/(.*)",
+            "dest": "/api/index.php"
         }
     ],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "APP_URL": "https://yourproductionurl.com",
+        "APP_URL": "https://smart-routines.vercel.app",
  
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
@@ -28,6 +28,11 @@
  
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie"
+        "SESSION_DRIVER": "cookie",
+
+        "DB_CONNECTION": "pgsql",
+        "DB_PORT": "5432",
+
+        "APP_KEY": "base64:ySWx2BG87JtbL8jC4NmTcT6TGSTZhOekkInq6dtNFPc="
     }
 }
