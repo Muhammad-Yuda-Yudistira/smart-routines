@@ -1,8 +1,8 @@
 import { Link } from "@inertiajs/react";
 
-export default function Navbar({user}) {
+export default function Navbar({user,appName}) {
     return (
-        <div className="navbar bg-dark text-secondary-content shadow-2xl shadow-white">
+        <div className="navbar text-second shadow-2xl shadow-orange-600 bg-main">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -44,7 +44,7 @@ export default function Navbar({user}) {
                     </ul>
                 </div>
                 <Link className="btn btn-ghost normal-case text-xl" href={route('homepage')}>
-                    Smart Routines
+                    {appName}
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">

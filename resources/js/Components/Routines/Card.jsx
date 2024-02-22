@@ -1,6 +1,8 @@
 import { Link, router } from "@inertiajs/react";
 import Modal from "@/Components/Routines/Modal";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import parse from "html-react-parser";
 
 export default function Card({
   routine = null,
@@ -34,7 +36,7 @@ export default function Card({
             })}
           </div>
           <h2 className="text-4xl font-medium text-second">{routine.title}</h2>
-          <p className="text-xl text-slate-500">{routine.description}</p>
+          <p className="text-xl text-slate-500 bg-slate-200 p-3 rounded">{parse(routine.description)}</p>
           <p className="text-sm text-slate-400">{newTime}</p>
           <div className="action flex gap-1 pt-3">
             <button
@@ -50,9 +52,18 @@ export default function Card({
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                if (confirm("Are you sure?")) {
-                  router.delete(route("routines.destroy", { id: routine.id }));
-                }
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "Delete this...",
+                  confirmButtonText: "Yes, delete it!",
+                  showCancelButton: true,
+                  confirmButtonColor: "#ea580c",
+                  cancelButtonColor: "#64748b",
+                }).then(result => {
+                    if(result.isConfirmed) {
+                      router.delete(route("routines.destroy", {id: routine.id}));
+                    }
+                })
               }}
               className="badge bg-second text-main border-0"
             >
@@ -86,7 +97,7 @@ export default function Card({
           >
             Add
           </button>
-          <p className="text-sm text-center text-slate-700 pt-1">{newTime}</p>
+          <p className="text-sm text-center text-main pt-1 relative z-20">{newTime}</p>
           <div id="bg-glassmorphism" className="absolute w-full h-full top-0 left-0 bg-clip bg-second blur-sm"></div>
         </div>
       </div>

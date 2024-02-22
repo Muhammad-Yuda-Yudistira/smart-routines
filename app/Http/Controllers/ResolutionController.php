@@ -96,35 +96,53 @@ class ResolutionController extends Controller
     public function update(Request $request, string $id)
     {
         $resolution = Resolution::find($id);
-        // PR: data input tidak muncul ke request termasuk file
-        dd($request);
-        if($request->file('image')->store('resolution-image'))
-        {
-            $newImageName = $request->file('image')->store('resolution-image');
-            Storage::delete($resolution->image);
 
-            $resolution->update([
-                'title' => $request->title,
-                'type' => $request->type,
-                'period' => $request->period,
-                'category_id' => $request->category_id,
-                'goal' => $request->goal,
-                'description' => $request->description,
-                'image' => $newImageName,
-            ]);
+        // if($request->file('image')->store('resolution-image'))
+        // {
+        //     // $newImageName = $request->file('image')->store('resolution-image');
+        //     // Storage::delete($resolution->image);
 
-        } else
-        {
-            $resolution->update([
-                'title' => $request->title,
-                'type' => $request->type,
-                'period' => $request->period,
-                'category_id' => $request->category_id,
-                'goal' => $request->goal,
-                'description' => $request->description,
-                'image' => $request->image,
-            ]);
-        }
+        //     $resolution->update([
+        //         'title' => $request->title,
+        //         'type' => $request->type,
+        //         'period' => $request->period,
+        //         'category_id' => $request->category_id,
+        //         'goal' => $request->goal,
+        //         'description' => $request->description,
+        //         // 'image' => $newImageName,
+        //     ]);
+
+        // } else
+        // {
+        //     $resolution->update([
+        //         'title' => $request->title,
+        //         'type' => $request->type,
+        //         'period' => $request->period,
+        //         'category_id' => $request->category_id,
+        //         'goal' => $request->goal,
+        //         'description' => $request->description,
+        //         // 'image' => $request->image,
+        //     ]);
+        // }
+
+        $request->validate([
+            'title' => 'required|string|max:100',
+            'type' => ['required', 'string', Rule::in(['Obligation', 'Lifestyle'])],
+            'period' => ['required', 'string', Rule::in(['Daily', 'Weekly', 'Monthly', 'Yearly'])],
+            'category_id' => 'required|numeric',
+            'goal' => 'required|string',
+            'description' => 'required|string|',
+        ]);
+
+        $resolution->update([
+            'title' => $request->title,
+            'type' => $request->type,
+            'period' => $request->period,
+            'category_id' => $request->category_id,
+            'goal' => $request->goal,
+            'description' => $request->description,
+            // 'image' => $request->image,
+        ]);
         return redirect('dashboard/resolutions')->with('message', 'Resolution has been updated!');
     }
 

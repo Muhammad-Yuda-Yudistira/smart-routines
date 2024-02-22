@@ -27,6 +27,10 @@ class RoutineFactory extends Factory
     // ubah kembali ke time
     $hours = floor($addOneHour / 60);
     $minutes = $addOneHour % 60;
+    if($hours >= 24)
+    {
+      $minutes = 0;
+    }
     $end_time = sprintf("%02d:%02d", $hours, $minutes);
 
     $users = User::all();

@@ -6,7 +6,7 @@ import LoadingPage from '@/Layouts/LoadingPage';
 import "@/../css/home.css";
 import "/node_modules/shepherd.js/dist/css/shepherd.css";
 import { ShepherdTour, ShepherdTourContext } from 'react-shepherd';
-// import newSteps from '@/Pages/steps';
+import newSteps from '@/Pages/steps';
 
 const tourOptions = {
   defaultStepOptions: {
@@ -26,15 +26,15 @@ function Button() {
   }
 }
 
-export default function Homepage()
+export default function Homepage({appName})
 {
   const audioRef = useRef();
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0)
   const playlist = [
-      {title: 'Leonell Cassio - The paranormal is real (ft-carrie)', source: 'assets/images/theme/audio/leonell-cassio-the-paranormal-is-real-ft-carrie.mp3'},
-      {title: 'Science Documentary', source: 'assets/images/theme/audio/science-documentary.mp3'},
-      {title: 'Sakura Girl - Peach', source: 'assets/images/theme/audio/Sakura-Girl-Peach.mp3'},
-      {title: 'A long way', source: 'assets/images/theme/audio/a-long-way.mp3'},
+      {title: 'Leonell Cassio - The paranormal is real (ft-carrie)', source: '/assets/images/theme/audio/leonell-cassio-the-paranormal-is-real-ft-carrie.mp3'},
+      {title: 'Science Documentary', source: '/assets/images/theme/audio/science-documentary.mp3'},
+      {title: 'Sakura Girl - Peach', source: '/assets/images/theme/audio/Sakura-Girl-Peach.mp3'},
+      {title: 'A long way', source: '/assets/images/theme/audio/a-long-way.mp3'},
     ]
 
   gsap.registerPlugin(TextPlugin);
@@ -72,20 +72,20 @@ export default function Homepage()
             <LoadingPage>
 
               <div id="audio-box" className="absolute flex flex-col justify-center z-0">
-                <audio id="backsound" className="" ref={audioRef} controls volume="0.5" src="assets/images/theme/audio/a-long-way.mp3"></audio>
+                <audio id="backsound" className="" ref={audioRef} controls volume="0.5" src="/public/assets/images/theme/audio/a-long-way.mp3"></audio>
                 <h2 className="text-gray-400"><span id="audio-icon" className="text-sm">🎹</span> {playlist[currentAudioIndex].title}</h2>
               </div>
-              <div id="hero-homepage" className="container text-center w-full m-10">
+              <div id="hero-homepage" className="container text-center w-full m-10 mb-0">
                 <section id="section-1">
-                  {/*<ShepherdTour steps={newSteps} tourOptions={tourOptions}>
+                  <ShepherdTour steps={newSteps} tourOptions={tourOptions}>
                     <Button />
-                  </ShepherdTour>*/}
+                  </ShepherdTour>
 
-                  <div className="title-box mb-16">
-                    <h1 id="title" className="text-5xl text-gray-300">Smart Routines</h1>
+                  <div className="title-box mb-8">
+                    <h1 id="title" className="text-5xl text-gray-300 uppercase">{appName}</h1>
                     <small id="title-tag" className="text-sm text-gray-400 tracking-widest"></small>
                   </div>
-                  <div id="description" className="flex flex-col justify-between gap-24">
+                  <div id="description" className="flex flex-col justify-between gap-16">
                     <span className="paragraf-1 text-gray-400 font-serif tracking-wide box-border h-20">
                       <span id="text-box" className="block h-6">
                         <p className="viewer inline hover:text-xl transition-all duration-150">You are Main Character in Your life. Create your mission and done of this game.</p><br/>
@@ -104,17 +104,17 @@ export default function Homepage()
                     </span>
                   </div>
                   <div className="py-10">
-                    <Link href={route('guides.index')} id="step-2" className="clicker text-4xl inline-block">📘</Link>
-                    <div className="uppercase text-base text-blue-300 font-semibold">Guide</div>
+                    <Link href="/guides" id="step-2" className="clicker text-4xl inline-block">📘</Link>
+                    <div className="uppercase text-base text-second font-semibold">Guide</div>
                   </div>
                 </section>
               </div>
              <section id="section-2" className="flex">
               <span className="flex justify-center items-center w-[50%] h-40 bg-transparent text-center">
-                <Link href="/login" type="button" as="button" className="btn hover:bg-gray-200 bg-transparent text-gray-500 hover:text-gray-400 shadow-neutral-600 hover:shadow hover:border-dashed">💎 Sign-In</Link>
+                <Link href="/login" type="button" as="button" className="btn hover:bg-gray-200 bg-transparent text-gray-500 border-gray-500 hover:text-gray-400 shadow-neutral-600 hover:shadow hover:border-dashed hover:border-orange-600">💎 Sign-In</Link>
               </span>
               <span id="button-2" className="flex justify-center items-center inline-block w-[50%] h-40 bg-blue-600 text-center backdrop-opacity-25">
-                <Link href="/register" type="button" as="button" className="btn bg-slate-900 text-gray-100 hover:bg-gray-300 hover:text-gray-700 shadow-neutral-600 shadow-md">✨ Sign-Up</Link>
+                <Link href="/register" type="button" as="button" className="btn bg-second border-orange-600 text-gray-100 hover:bg-gray-300 hover:text-gray-700 hover:border-gray-400 shadow-neutral-600 shadow-md">✨ Sign-Up</Link>
               </span>
             </section>
           </LoadingPage>

@@ -26,7 +26,7 @@ const newSteps = [
       element: '#step-2',
       on: 'right',
     },
-    title: 'Step 2 of 3. tap right arrow for next..',
+    title: 'Step 2 of 3.',
     text: 'Check how to create effective your schedule!',
     buttons: [
       {

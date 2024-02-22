@@ -11,6 +11,7 @@
 }
 
 @layer utilities {
+	/*	#ea580c */
 	.bg-second {
 		@apply bg-orange-600
 	}
@@ -27,7 +28,11 @@
 	.text-main {
 		@apply text-white
 	}
+	.bg-main {
+		@apply bg-white
+	}
 
+	/* slate-500: #64748b	*/
 	.text-title {
 		@apply text-slate-300
 	}
@@ -37,6 +42,9 @@
 	.text-sub-desc {
 		@apply text-slate-500
 	}
+	.bg-content {
+		@apply bg-slate-100
+	}
 
 	.bg-accent {
 		@apply bg-red-300
@@ -44,6 +52,6 @@
 
 	/*	alert style */
 	.text-error {
-		@apply text-red-600
+		@apply text-[#fd1d1d]
 	}
 }

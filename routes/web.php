@@ -23,7 +23,10 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Homepage/Homepage');
+    $appName = env('APP_NAME', 'Unlimited!');
+    return Inertia::render('Homepage/Homepage', [
+    'appName' => $appName,
+    ]);
 })->middleware('guest')->name('homepage');
 
 Route::get('/routines', function () {
@@ -34,7 +37,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// user access
+// user access main contents
 Route::middleware('auth')->group(function() {
     Route::resource('/dashboard/routines', RoutineController::class);
     Route::resource('/dashboard/resolutions', ResolutionController::class);

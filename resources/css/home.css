@@ -1,15 +1,15 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Nova+Square&family=Smooch+Sans&family=Vina+Sans&display=swap');*/
 
 #container-homepage {
-	cursor: url('assets/cursors/the-elder-skyrim.ani'), url(https://cur.cursors-4u.net/games/gam-14/gam1380.png), auto !important;
+	cursor: url('/public/assets/cursors/the-elder-skyrim.ani'), url(https://cur.cursors-4u.net/games/gam-14/gam1380.png), auto !important;
 }
 
 #container-homepage button:hover {
-	cursor: url('assets/cursors/jamaican-fish.cur'), auto !important;
+	cursor: url('/public/assets/cursors/jamaican-fish.cur'), auto !important;
 }
 
 audio::-webkit-media-controls-play-button:hover {
-	cursor: url('assets/cursors/snail.cur'), auto !important;
+	cursor: url('/public/assets/cursors/snail.cur'), auto !important;
 }
 
 audio {
@@ -44,7 +44,7 @@ audio::-webkit-media-controls-current-time-display, audio::-webkit-media-control
 }
 
 #container-homepage {
-	background-image: url('assets/images/theme/minimalist-white.jpg');
+	background-image: url('/public/assets/images/theme/minimalist-white.jpg');
 	background-position: center;
 	background-size: cover;
 }
@@ -82,7 +82,7 @@ audio::-webkit-media-controls-current-time-display, audio::-webkit-media-control
 }
 
 #button-2 {
-	background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5)), url('assets/images/theme/flower-frame.jpg');
+	background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5)), url('/public/assets/images/theme/flower-frame.jpg');
 	background-position-y: bottom;
 	background-position-x: right;
 	background-size: cover;

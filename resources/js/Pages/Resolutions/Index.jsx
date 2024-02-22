@@ -1,12 +1,12 @@
-import {Head,Link,usePage} from '@inertiajs/react';
+import {Head,Link,usePage,router} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ContainerAdmin from '@/Layouts/ContainerAdmin';
 import Title from '@/Components/Title';
+import Swal from 'sweetalert2';
+import parse from 'html-react-parser';
 
 export default function Index({auth,title,data,routines}) {
   const {flash} = usePage().props;
-  console.log("data:", data)
-  console.log("routines:", routines)
 	return (
 		<>
 			<AuthenticatedLayout
@@ -21,7 +21,7 @@ export default function Index({auth,title,data,routines}) {
 
             <ContainerAdmin>
                 {flash.message && (
-                  <div role="alert" className="alert h-12 mb-8 py-2 rounded-tr-none">
+                  <div role="alert" className="alert h-12 mb-8 py-2 rounded-tr-none bg-second-2 text-main border-orange-600">
                     <svg fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <span>{flash.message}</span>
                   </div>
@@ -56,7 +56,13 @@ export default function Index({auth,title,data,routines}) {
                 <main className="font-tersier">
                 {data <= 0 && (<h3 className="text-4xl my-28 text-center opacity-80">Resolution Empty</h3>)}
                 {data.map(resolution => {
-                    let newUrlImg = "/storage/" + resolution.image;
+                    let newUrlImg;
+                    if(resolution.image == "https://source.unsplash.com/300x300")
+                    {
+                        newUrlImg = resolution.image;
+                    } else {
+                        newUrlImg = "/storage/" + resolution.image;
+                    }
                     return(
                             <ul className="mb-12">
                                 <div className="mb-7">
@@ -67,54 +73,71 @@ export default function Index({auth,title,data,routines}) {
                                         <p className="text-second uppercase inline">{resolution.title}</p>
                                     </li>
                                 </div>
-                                <div>
-                                    <li className="w-300 h-300 block">
-                                        <div className="w-300 h-300">
-                                            <img src={newUrlImg} alt="Image for motivation goals" className="float-left pr-6" width="300" height="300"/>
-                                        </div>
-                                    </li>
-                                    <div className="mb-2">
-                                        <Link href={route('resolutions.edit', {id:resolution.id})} method="get" as="button" type="button" className="btn btn-sm btn-outline uppercase mr-4 rounded-tr-none text-sm btn-disabled">
-                                            <span className="text-xl">
-                                                <svg fill="white" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M960.36.011 109 508.785v902.442L960.36 1920l851.475-508.773V508.785L960.36.01ZM222.516 1346.864v-773.83L960.36 132.143l737.96 440.89v773.831l-737.96 441.005-737.846-441.005Z" fill-rule="evenodd"/>
-                                                </svg>
-                                            </span>
-                                            edit
-                                        </Link>
-                                        <Link href={route('resolutions.destroy', {id:resolution.id})} method="delete" onClick={function() { return confirm('Are you sure?')}} as="button" type="button" className="btn btn-sm uppercase mr-4 rounded-tr-none text-sm bg-second-2 border-none text-main hover:bg-orange-500">
-                                            <span className="text-xl">
-                                                <svg fill="white" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M960.36.011 109 508.785v902.442L960.36 1920l851.475-508.773V508.785z" fill-rule="evenodd"/>
-                                                </svg>
-                                            </span>
-                                            delete
-                                        </Link>
+                                <div id="content-box" className="flex gap-10">
+                                    <div id="content-left">
+                                        <li className="w-400 h-400 block">
+                                            <div className="w-full h-full overflow-hidden">
+                                                <img src={newUrlImg} alt="Image for motivation goals" className="overflow-hidden" width="400" height="400"/>
+                                            </div>
+                                        </li>
                                     </div>
-                                    <li>
-                                        <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">type: </span>{resolution.type}</p>
-                                    </li>
-                                    <li>
-                                        <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">duration type: </span>{resolution.period}</p>
-                                    </li>
-                                    <li>
-                                        <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">category: </span>{resolution.category.name}</p>
-                                    </li>
-                                    <li>
-                                        <p className="text-desc"><div className="text-xl text-desc font-semibold capitalize">description: </div>{resolution.description}</p>
-                                    </li>
-                                    <li>
-                                      <div className="text-3xl font-semibold capitalize text-desc">routines for this goal: </div>
-                                      <ul className="">
-                                        {
-                                          routines.filter(routine => routine.category_id === resolution.category_id).length > 0 
-                                            ? 
-                                            routines.filter(routine => routine.category_id === resolution.category_id).map(routine => <Link href={"/dashboard/routines#" + routine.id} className="text-second underline"><li key={routine.id} className="clicker inline text-xl">{"- " + routine.title}</li></Link>) 
-                                            :
-                                            <li className="text-error opacity-60 text-semibold uppercase text-3xl py-12 text-center">Routines not found!</li>
-                                        }
-                                      </ul>
-                                    </li>
+                                    <div id="content-right">
+                                        <div className="mb-2">
+                                            <Link href={route('resolutions.edit', {id:resolution.id})} method="get" as="button" type="button" className="btn btn-sm btn-outline uppercase mr-4 rounded-tr-none text-sm">
+                                                <span className="text-xl">
+                                                    <svg fill="black" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M960.36.011 109 508.785v902.442L960.36 1920l851.475-508.773V508.785L960.36.01ZM222.516 1346.864v-773.83L960.36 132.143l737.96 440.89v773.831l-737.96 441.005-737.846-441.005Z" fill-rule="evenodd"/>
+                                                    </svg>
+                                                </span>
+                                                edit
+                                            </Link>
+                                            <Link onClick={function(e) { 
+                                                e.preventDefault()
+                                                Swal.fire({
+                                                    title: "Are you sure?",
+                                                    text: "Delete this...",
+                                                    confirmButtonText: "Yes, delete it!",
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: "#ea580c",
+                                                    cancelButtonColor: "#64748b",
+                                                }).then(result => {
+                                                    if(result.isConfirmed) {
+                                                        router.delete(route('resolutions.destroy', {id:resolution.id}))
+                                                    } 
+                                                })}} as="button" type="button" className="btn btn-sm uppercase mr-4 rounded-tr-none text-sm bg-second-2 border-none text-main hover:bg-orange-500">
+                                                <span className="text-xl">
+                                                    <svg fill="white" width="16px" height="16px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M960.36.011 109 508.785v902.442L960.36 1920l851.475-508.773V508.785z" fill-rule="evenodd"/>
+                                                    </svg>
+                                                </span>
+                                                delete
+                                            </Link>
+                                        </div>
+                                        <li>
+                                            <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">type: </span>{resolution.type}</p>
+                                        </li>
+                                        <li>
+                                            <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">duration type: </span>{resolution.period}</p>
+                                        </li>
+                                        <li>
+                                            <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">category: </span>{resolution.category.name}</p>
+                                        </li>
+                                        <li className="bg-slate-100 p-5 rounded">
+                                            <p className="text-desc"><div className="text-xl text-desc font-semibold capitalize">description: </div>{parse(resolution.description)}</p>
+                                        </li>
+                                        <li>
+                                          <div className="text-3xl font-semibold capitalize text-desc">routines for this goal: </div>
+                                          <ul className="">
+                                            {
+                                              routines.filter(routine => routine.category_id === resolution.category_id).length > 0 
+                                                ? 
+                                                routines.filter(routine => routine.category_id === resolution.category_id).map(routine => <Link href={"/dashboard/routines#" + routine.id} className="text-second underline"><li key={routine.id} className="clicker inline text-xl">{"- " + routine.title}</li></Link>) 
+                                                :
+                                                <li className="text-desc opacity-60 text-semibold uppercase text-3xl py-12 text-center">Routines not found!</li>
+                                            }
+                                          </ul>
+                                        </li>
+                                    </div>
                                 </div>
                                 <hr className="border-t-2 mt-3" />
                             </ul>
