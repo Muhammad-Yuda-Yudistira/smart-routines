@@ -18,7 +18,7 @@ jobs:
         run: npm install --global vercel@latest
 
       - name: Install Depedencies
-        run: composer intstall
+        run: composer install
 
       - name: Migrate DB
         run: |
