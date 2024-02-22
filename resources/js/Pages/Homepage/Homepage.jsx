@@ -105,7 +105,7 @@ export default function Homepage({appName})
                   </div>
                   <div className="py-10">
                     <Link href="/guides" id="step-2" className="clicker text-4xl inline-block">📘</Link>
-                    <div className="uppercase text-base text-second font-semibold">Guide</div>
+                    <div className="uppercase text-base text-second font-semibold">Guide Box</div>
                   </div>
                 </section>
               </div>
