@@ -17,7 +17,7 @@ class ResolutionController extends Controller
      */
     public function index()
     {
-        $data = Resolution::where('user_id', auth()->user()->id)->latest()->with('category')->get();
+        $data = Resolution::where('user_id', auth()->user()->id)->with('category')->latest()->get();
         $routines = Routine::where('user_id', auth()->user()->id)->get();
         return Inertia::render('Resolutions/Index', [
             'title' => 'Resolution',

@@ -3,7 +3,7 @@ import {useState,useEffect,useRef} from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ContainerAdmin from '@/Layouts/ContainerAdmin';
 import Title from '@/Components/Title';
-import JoditEditor from 'jodit-react';
+import JoditHandle from '@/Components/Routines/JoditHandle';
 
 
 export default function Form({title,categories,resolution=null,auth})
@@ -250,11 +250,9 @@ export default function Form({title,categories,resolution=null,auth})
 														<label for="description"className="mr-3 font-semibold capitalize">description:</label>
 													</td>
 													<td className="w-full flex flex-col justify-start">
-														<JoditEditor 
-															ref={editor}
-															config={config}
-															value={description}
-															onBlur={newDesc => {setDescription(newDesc)}}
+														<JoditHandle 
+															description={description}
+															setDescription={setDescription}
 														/>
 														{errors.description && <small className="text-second">{errors.description}</small>}
 														<div className="label p-0">
@@ -274,7 +272,7 @@ export default function Form({title,categories,resolution=null,auth})
 															<img src={"/storage/" + resolution.image} alt="" width="150" height="150" className=""/>
 														</span>}
 														
-														<input id="image" type="file" name="image" onChange={handleChange} className="file-input file-input-sm file-input-bordered file-input-info w-full max-w-xs bg-slate-300 border-slate-400 placeholder-slate-400 text-sub-desc" disabled />
+														<input id="image" type="file" name="image" onChange={handleChange} className="file-input file-input-sm file-input-bordered file-input-info w-full max-w-xs bg-slate-300 border-slate-400 placeholder-slate-400 text-sub-desc" />
 														<small className="block">{image.name}</small>
 														{errors.image && <small className="text-second">{errors.image}</small>}
 														<div className="label p-0">

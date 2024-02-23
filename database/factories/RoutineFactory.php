@@ -45,7 +45,7 @@ class RoutineFactory extends Factory
     return [
       'title' => fake()->sentence(),
       'description' => fake()->paragraph(),
-      'category_id' => mt_rand(1, 11),
+      'category_id' => mt_rand(1, 10),
       'user_id' => $userIds->random(),
       'start_time' => $start_time,
       'end_time' => $end_time,

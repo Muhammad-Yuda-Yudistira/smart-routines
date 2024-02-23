@@ -1,6 +1,7 @@
 import { router, usePage } from "@inertiajs/react";
 import { useEffect, useState, useRef } from "react";
-import JoditEditor from "jodit-react";
+import JoditHandle from "@/Components/Routines/JoditHandle";
+
 
 const Modal = function ({
   categories,
@@ -211,12 +212,9 @@ const Modal = function ({
               </li>
               <li>
                 <div className="form-control">
-                  <JoditEditor 
-                    ref={editor}
-                    config={config}
-                    value={description}
-                    onBlur={newDesc => {setDescription(newDesc)}}
-                  />
+
+                  <JoditHandle description={description} setDescription={setDescription}  />
+
                   <label className="label">
                     {errors.description && (
                       <span className="label-text-alt text-second">

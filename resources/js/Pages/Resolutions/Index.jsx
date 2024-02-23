@@ -120,7 +120,7 @@ export default function Index({auth,title,data,routines}) {
                                             <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">duration type: </span>{resolution.period}</p>
                                         </li>
                                         <li>
-                                            <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">category: </span>{resolution.category.name}</p>
+                                            <p className="text-desc capitalize"><span className="font-semibold text-xl text-desc">category: </span>{resolution.category.name ? resolution.category.name : ''}</p>
                                         </li>
                                         <li className="bg-slate-100 p-5 rounded">
                                             <p className="text-desc"><div className="text-xl text-desc font-semibold capitalize">description: </div>{parse(resolution.description)}</p>
