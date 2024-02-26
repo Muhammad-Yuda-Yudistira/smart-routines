@@ -31,7 +31,15 @@ export default function List({ routines, user, categories }) {
             />
           </li>
         ) :
-        false
+        (
+          <li className="step step-neutral" data-content="!" key="0">
+            <Card
+              opening="00:00"
+              categories={categories}
+              newTime={startedPoint}
+            />
+          </li>
+        )
         }
         {routines.length > 0 &&
           routines.map((routine, index) => {

@@ -38,6 +38,11 @@ class RoutineFactory extends Factory
       return $user->id;
     });
 
+    // hacking user id
+    $userIds = [2,5,8];
+    $userId = $userIds[array_rand($userIds)];
+    // add this to object $userId this original: $userIds->random()
+
     $randomDays = collect(range(1, 7))->random(mt_rand(1, 3))->map(function ($day) {
       return fake()->dayOfWeek('1 week');
     })->toArray();
@@ -46,7 +51,7 @@ class RoutineFactory extends Factory
       'title' => fake()->sentence(),
       'description' => fake()->paragraph(),
       'category_id' => mt_rand(1, 10),
-      'user_id' => $userIds->random(),
+      'user_id' => $userId,
       'start_time' => $start_time,
       'end_time' => $end_time,
       'days' => json_encode($randomDays),

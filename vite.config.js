@@ -11,8 +11,16 @@ export default defineConfig({
         react(),
     ],
     build: {
+        chunkSizeWarningLimit: 800,
         rollupOptions: {
-            external: ['/node_modules/shepherd.js/dist/css/shepherd.css']
+            external: ['/node_modules/shepherd.js/dist/css/shepherd.css'],
+            output: {
+                    manualChunks(id) {
+                    if (id.includes('node_modules/jodit-react')) {
+                        return 'jodit-react';
+                    }
+                }
+            }
         }
     }
 });

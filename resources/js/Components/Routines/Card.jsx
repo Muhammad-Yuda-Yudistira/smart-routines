@@ -18,6 +18,7 @@ export default function Card({
     const keyModal = e.target.getAttribute("index");
     document.querySelector(`#my_modal_5[index="${keyModal}"]`).showModal();
   }
+  // console.log('routine:', routine)
   return routine !== null ? (
     <>
       <div id={routine.id} className="chat chat-start w-full text-black text-start flex-1 font-tersier">
@@ -26,7 +27,7 @@ export default function Card({
         </div>
         <div className="chat-bubble p-8 py-4 min-w-44 bg-white shadow-md shadow-slate-300">
           <div className="badge bg-slate-300 text-slate-500 mb-3 text-xl rounded-sm py-3 border-0">
-            {routine.category.name}
+            {routine ? routine.category.name : ''}
           </div>
           <div>
             {days.map(day => {

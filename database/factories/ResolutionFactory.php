@@ -37,7 +37,7 @@ class ResolutionFactory extends Factory
     {
         return $this->afterCreating(function (Resolution $resolution) {
             // Logika setelah menciptakan Resolusi, termasuk menambahkan user_id
-            $user = User::whereIn('id', [1,2,3])->inRandomOrder()->first();
+            $user = User::whereIn('id', [2,5,8])->inRandomOrder()->first();
             $resolution->user_id = $user->id;
             $resolution->save();
         });

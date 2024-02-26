@@ -10,8 +10,16 @@
             "dest": "/build/$1"
         },
         {
-        "src": "/(.*)",
-        "dest": "/api/index.php"
+            "src": "/(.*)",
+            "dest": "/api/index.php"
+        },
+        {
+            "src": "/storage/(.*)",
+            "dest": "/storage/app/public/"
+        },
+        {
+            "src": "/assets/(.*)",
+            "dest": "/public/assets/"
         }
     ],
     "env": {
